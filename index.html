@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Headliner Cards — Artist Representation Network</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,700;0,900;1,700;1,900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --yellow: #FFE500;
+      --red:    #E8000D;
+      --black:  #0A0A0A;
+      --white:  #FFFFFF;
+      --off:    #F5F5F3;
+      --light:  #EBEBEA;
+      --muted:  #777777;
+      --border: #E0E0DE;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: 'Chivo', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      height: 68px;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      box-shadow: 0 1px 12px rgba(0,0,0,0.06);
+    }
+    .nav-logo img { height: 36px; width: auto; display: block; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a {
+      color: var(--black);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--red); }
+    .nav-cta {
+      background: var(--red);
+      color: var(--white);
+      font-weight: 900;
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 11px 26px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      height: 92vh;
+      min-height: 620px;
+      margin-top: 68px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero-slideshow { position: absolute; inset: 0; }
+    .hero-slide {
+      position: absolute; inset: 0;
+      background-size: cover;
+      background-position: center 20%;
+      opacity: 0;
+      transition: opacity 1.4s ease-in-out;
+    }
+    .hero-slide.active { opacity: 1; }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 55%, rgba(0,0,0,0.1) 100%);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 0 56px 72px;
+      max-width: 860px;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--black);
+      font-size: 11px; font-weight: 900;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-weight: 900;
+      font-size: clamp(48px, 8vw, 100px);
+      line-height: 0.93;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 28px;
+    }
+    .hero h1 em { font-style: italic; color: var(--yellow); }
+    .hero-sub {
+      font-size: 18px; color: rgba(255,255,255,0.75);
+      max-width: 520px; margin-bottom: 40px;
+      font-weight: 300; line-height: 1.75;
+    }
+    .btn-yellow {
+      display: inline-block; background: var(--yellow); color: var(--black);
+      font-weight: 900; font-size: 13px; letter-spacing: 0.14em;
+      text-transform: uppercase; padding: 16px 36px;
+      text-decoration: none; margin-right: 12px; transition: opacity 0.2s;
+    }
+    .btn-yellow:hover { opacity: 0.88; }
+    .btn-outline-white {
+      display: inline-block; border: 2px solid rgba(255,255,255,0.4);
+      color: var(--white); font-weight: 700; font-size: 13px;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 14px 36px; text-decoration: none; transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-outline-white:hover { border-color: var(--yellow); color: var(--yellow); }
+
+    /* ─── TICKER ─── */
+    .ticker-wrap { overflow: hidden; background: var(--black); padding: 13px 0; }
+    .ticker { display: flex; animation: ticker 32s linear infinite; width: max-content; }
+    .ticker-item {
+      font-weight: 700; font-size: 11px; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--white); padding: 0 28px; white-space: nowrap;
+    }
+    .ticker-sep { color: var(--yellow); }
+    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ─── SHARED SECTION STYLES ─── */
+    section { padding: 96px 56px; }
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--red); margin-bottom: 14px;
+    }
+    .section-title {
+      font-weight: 900;
+      font-size: clamp(36px, 5vw, 68px);
+      line-height: 0.95; text-transform: uppercase;
+      color: var(--black); margin-bottom: 20px;
+    }
+    .section-title em { font-style: italic; color: var(--red); }
+    .rule { width: 40px; height: 4px; background: var(--yellow); margin-bottom: 44px; }
+    .inner { max-width: 1200px; margin: 0 auto; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .three-col { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+    .four-col { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
+
+    /* ─── WELCOME ─── */
+    .welcome-section { background: var(--off); border-bottom: 1px solid var(--border); }
+    .welcome-inner { max-width: 760px; margin: 0 auto; text-align: center; }
+    .welcome-inner h2 {
+      font-weight: 900; font-size: clamp(28px, 4vw, 48px);
+      margin-bottom: 24px; line-height: 1.1;
+    }
+    .welcome-inner p { font-size: 19px; color: #555; line-height: 1.8; font-weight: 300; }
+    .welcome-inner p strong { color: var(--black); font-weight: 700; }
+
+    /* ─── THE PROBLEM ─── */
+    .problem-section { background: var(--white); }
+    .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+    .problem-list { list-style: none; margin-top: 8px; }
+    .problem-list li {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .problem-list li:last-child { border-bottom: none; }
+    .prob-title {
+      font-weight: 900; font-size: 18px; text-transform: uppercase;
+      letter-spacing: 0.04em; margin-bottom: 6px;
+    }
+    .prob-title span {
+      display: inline-block;
+      background: var(--red); color: var(--white);
+      font-size: 10px; font-weight: 900; letter-spacing: 0.1em;
+      padding: 2px 8px; margin-right: 10px; vertical-align: middle;
+    }
+    .prob-desc { font-size: 15px; color: var(--muted); line-height: 1.65; font-weight: 300; }
+
+    /* ─── THE SOLUTION ─── */
+    .solution-section { background: var(--black); }
+    .solution-section .section-label { color: var(--yellow); }
+    .solution-section .section-title { color: var(--white); }
+    .solution-section .section-title em { color: var(--yellow); font-style: normal; }
+    .solution-section .rule { background: var(--red); }
+    .solution-sub {
+      font-size: 18px; font-weight: 700; color: var(--yellow);
+      margin-bottom: 48px; text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .solution-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; background: #1a1a1a; border: 1px solid #1a1a1a; }
+    .solution-item {
+      background: #111; padding: 36px 32px;
+      border-top: 3px solid transparent; transition: border-color 0.2s;
+    }
+    .solution-item:hover { border-color: var(--yellow); }
+    .sol-num { font-weight: 900; font-size: 11px; letter-spacing: 0.2em; color: var(--red); margin-bottom: 10px; }
+    .sol-title { font-weight: 900; font-size: 19px; text-transform: uppercase; color: var(--white); margin-bottom: 10px; }
+    .sol-desc { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.7; font-weight: 300; }
+
+    /* ─── THREE WAYS TO PARTNER ─── */
+    .partner-section { background: var(--off); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .partner-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 56px; }
+    .partner-card { background: var(--white); padding: 44px 36px; position: relative; }
+    .partner-tag {
+      display: inline-block; background: var(--yellow); color: var(--black);
+      font-weight: 900; font-size: 13px; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 6px 14px; margin-bottom: 24px;
+    }
+    .partner-tag.red { background: var(--red); color: var(--white); }
+    .partner-badge {
+      position: absolute; top: 44px; right: 36px;
+      background: var(--red); color: var(--white);
+      font-size: 9px; font-weight: 900; letter-spacing: 0.14em;
+      text-transform: uppercase; padding: 4px 10px;
+    }
+    .partner-card h3 { font-weight: 900; font-size: 22px; text-transform: uppercase; margin-bottom: 20px; }
+    .partner-list { list-style: none; }
+    .partner-list li {
+      font-size: 14px; color: #555; padding: 8px 0;
+      border-bottom: 1px solid var(--border); line-height: 1.5;
+      display: flex; gap: 10px; align-items: baseline; font-weight: 300;
+    }
+    .partner-list li:last-child { border-bottom: none; }
+    .partner-list li::before { content: '→'; color: var(--red); font-weight: 700; flex-shrink: 0; }
+
+    /* ─── HOW WE CHARGE ─── */
+    .charge-section { background: var(--white); }
+    .charge-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 56px; }
+    .charge-box { padding: 44px 40px; }
+    .charge-box.yes { border: 2px solid var(--black); }
+    .charge-box.no { background: var(--off); border: 1px solid var(--border); }
+    .charge-tag {
+      display: inline-block; font-weight: 900; font-size: 14px;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      padding: 6px 14px; margin-bottom: 24px;
+    }
+    .charge-tag.yes { background: var(--yellow); color: var(--black); }
+    .charge-tag.no { background: var(--light); color: var(--muted); text-decoration: line-through; }
+    .charge-list { list-style: none; }
+    .charge-list li {
+      font-size: 15px; padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex; gap: 12px; align-items: baseline;
+      line-height: 1.5; font-weight: 300;
+    }
+    .charge-list li:last-child { border-bottom: none; }
+    .charge-list.yes li::before { content: '✓'; color: var(--red); font-weight: 900; flex-shrink: 0; }
+    .charge-list.no li { color: var(--muted); font-style: italic; }
+    .charge-list.no li::before { content: '✗'; color: #ccc; font-weight: 900; flex-shrink: 0; }
+
+    /* ─── WHY ROSTER MATTERS ─── */
+    .roster-section { background: var(--off); border-top: 1px solid var(--border); }
+    .roster-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 56px; }
+    .roster-item { background: var(--white); padding: 40px 32px; transition: background 0.2s; }
+    .roster-item:hover { background: #FAFAF8; }
+    .roster-tag {
+      display: inline-block; background: var(--yellow); color: var(--black);
+      font-weight: 900; font-size: 12px; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 4px 12px; margin-bottom: 16px;
+    }
+    .roster-item h3 { font-weight: 900; font-size: 18px; text-transform: uppercase; margin-bottom: 12px; }
+    .roster-item p { font-size: 14px; color: var(--muted); line-height: 1.75; font-weight: 300; }
+
+    /* ─── FESTIVAL CONNECTIONS ─── */
+    .festival-section { background: var(--white); border-top: 1px solid var(--border); }
+    .festival-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 56px; }
+    .festival-box { border: 1px solid var(--border); padding: 44px 40px; }
+    .festival-box h3 {
+      display: inline-block; background: var(--yellow); color: var(--black);
+      font-weight: 900; font-size: 16px; text-transform: uppercase;
+      letter-spacing: 0.06em; padding: 5px 14px; margin-bottom: 24px;
+    }
+    .festival-box p { font-size: 15px; color: #555; line-height: 1.75; font-weight: 300; margin-bottom: 14px; }
+    .festival-box p:last-child { margin-bottom: 0; }
+    .festival-box p em { font-style: italic; color: var(--muted); }
+
+    /* ─── GALLERY / CRSSD ─── */
+    .gallery-section { background: var(--black); }
+    .gallery-section .section-label { color: var(--yellow); }
+    .gallery-section .section-title { color: var(--white); }
+    .gallery-section .section-title em { color: var(--yellow); font-style: normal; }
+    .gallery-section .rule { background: var(--red); }
+    .gallery-section .section-sub { color: rgba(255,255,255,0.45); font-size:16px; font-weight:300; max-width:500px; }
+    .gallery-grid { columns: 3; gap: 6px; max-width: 1400px; margin: 48px auto 0; }
+    .gallery-grid img { width:100%; display:block; margin-bottom:6px; object-fit:cover; transition: opacity 0.3s; }
+    .gallery-grid img:hover { opacity: 0.8; }
+
+    /* ─── HOW IT WORKS (Process) ─── */
+    .process-section { background: var(--off); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .steps { display:grid; grid-template-columns: repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); margin-top:56px; }
+    .step { background: var(--white); padding: 44px 32px; text-align: center; }
+    .step-num { font-weight:900; font-size:56px; color:rgba(232,0,13,0.1); line-height:1; margin-bottom:12px; }
+    .step-title { font-weight:900; font-size:18px; text-transform:uppercase; color:var(--black); margin-bottom:10px; }
+    .step-desc { font-size:14px; color:var(--muted); line-height:1.7; font-weight:300; }
+    .process-cta {
+      text-align:center; margin-top:40px;
+      font-weight:700; font-size:16px; color:var(--black);
+    }
+    .process-cta strong { color: var(--red); }
+
+    /* ─── TEAM ─── */
+    .team-section { background: var(--white); }
+    .team-featured { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:start; margin-bottom:64px; padding-bottom:64px; border-bottom:1px solid var(--border); }
+    .team-text .role {
+      font-size:13px; font-weight:700; font-style:italic; color:var(--muted);
+      text-transform:uppercase; letter-spacing:0.06em; margin-bottom:20px;
+    }
+    .team-text p { font-size:16px; color:#555; line-height:1.8; font-weight:300; margin-bottom:14px; }
+    .team-text .highlight {
+      display:inline-block; background:var(--yellow); color:var(--black);
+      font-weight:700; font-style:italic; padding:2px 8px; margin-bottom:10px;
+    }
+    .team-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:48px; }
+    .team-member h3 { font-weight:900; font-size:22px; margin-bottom:4px; }
+    .team-member .role { font-size:13px; color:var(--muted); font-weight:400; margin-bottom:14px; }
+    .team-member p { font-size:14px; color:#666; line-height:1.75; font-weight:300; }
+
+    /* ─── LOGO BREAK ─── */
+    .logo-break {
+      background: var(--yellow);
+      border-top: 3px solid var(--red); border-bottom: 3px solid var(--red);
+      padding: 52px 56px;
+      display: flex; align-items:center; justify-content:center; gap:56px; flex-wrap:wrap;
+    }
+    .logo-break img { width: min(300px, 45vw); }
+    .logo-break-text p {
+      font-weight:900; font-size:clamp(18px,2.6vw,26px);
+      text-transform:uppercase; letter-spacing:0.04em;
+      color:var(--black); line-height:1.25;
+    }
+    .logo-break-text p span { color:var(--red); }
+
+    /* ─── FORM ─── */
+    .form-section { background: var(--off); border-top: 1px solid var(--border); text-align:center; }
+    .form-section .rule { margin:0 auto 44px; background:var(--red); }
+    .form-sub { color:var(--muted); font-size:16px; max-width:460px; margin:0 auto 56px; font-weight:300; }
+    .artist-form { max-width:660px; margin:0 auto; text-align:left; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .form-group { margin-bottom:14px; }
+    .form-group label {
+      display:block; font-size:11px; font-weight:700; letter-spacing:0.18em;
+      text-transform:uppercase; color:var(--muted); margin-bottom:7px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width:100%; background:var(--white); border:1px solid var(--border);
+      color:var(--black); font-family:'Chivo',sans-serif; font-size:15px;
+      padding:13px 16px; outline:none; appearance:none; -webkit-appearance:none;
+      transition:border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group select {
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23aaa' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat:no-repeat; background-position:right 14px center; padding-right:36px;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color:var(--black); box-shadow:0 0 0 2px rgba(10,10,10,0.08);
+    }
+    .form-group textarea { resize:vertical; min-height:110px; }
+    .form-submit {
+      width:100%; background:var(--black); color:var(--white);
+      border:2px solid var(--black); font-family:'Chivo',sans-serif;
+      font-weight:900; font-size:16px; letter-spacing:0.14em;
+      text-transform:uppercase; padding:18px; cursor:pointer;
+      margin-top:6px; transition:background 0.2s, border-color 0.2s;
+    }
+    .form-submit:hover { background:var(--red); border-color:var(--red); }
+    .form-fine { text-align:center; font-size:12px; color:#aaa; margin-top:14px; }
+    .form-fine a { color:var(--black); text-decoration:underline; }
+    .success-msg {
+      display:none; background:#F0FFF4; border:1px solid #2D9249;
+      color:#1A6B33; font-weight:700; font-size:14px; letter-spacing:0.06em;
+      text-transform:uppercase; padding:20px; text-align:center; margin-top:14px;
+    }
+
+    /* ─── FOOTER ─── */
+    footer { background:var(--black); padding:56px 56px 36px; }
+    .footer-top {
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap:40px; flex-wrap:wrap;
+      padding-bottom:48px; border-bottom:1px solid #222; margin-bottom:32px;
+    }
+    .footer-logo img { height:48px; width:auto; display:block; }
+    .footer-col h4 { font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
+    .footer-col a { display:block; font-size:14px; color:rgba(255,255,255,0.5); text-decoration:none; margin-bottom:10px; transition:color 0.2s; }
+    .footer-col a:hover { color:var(--yellow); }
+    .footer-bottom { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+    .footer-bottom p { font-size:12px; color:#444; }
+    .footer-tagline { font-size:11px; font-weight:900; letter-spacing:0.22em; text-transform:uppercase; color:var(--yellow); }
+
+    /* ─── SITE PREVIEW ─── */
+    .site-preview-link { display:block; text-decoration:none; }
+
+    .site-preview {
+      position: relative;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .browser-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 16px;
+      background: var(--off);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .browser-dots {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .browser-dots span {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--border);
+      display: block;
+    }
+
+    .browser-dots span:nth-child(1) { background: #FF5F57; }
+    .browser-dots span:nth-child(2) { background: #FEBC2E; }
+    .browser-dots span:nth-child(3) { background: #28C840; }
+
+    .browser-url {
+      flex: 1;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 4px 12px;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0;
+      text-transform: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .browser-viewport {
+      position: relative;
+      height: 420px;
+      overflow: hidden;
+    }
+
+    .browser-viewport iframe {
+      width: 160%;
+      height: 160%;
+      transform: scale(0.625);
+      transform-origin: top left;
+      border: none;
+      pointer-events: none;
+      display: block;
+    }
+
+    .preview-overlay {
+      position: absolute;
+      inset: 0;
+      top: 41px; /* below browser bar */
+      background: rgba(0,0,0,0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s;
+    }
+
+    .preview-overlay span {
+      background: var(--yellow);
+      color: var(--black);
+      font-weight: 900;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 12px 28px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .site-preview-link:hover .preview-overlay { background: rgba(0,0,0,0.35); }
+    .site-preview-link:hover .preview-overlay span { opacity: 1; transform: translateY(0); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 960px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      section { padding: 72px 24px; }
+      .hero-content { padding: 0 24px 56px; }
+      .two-col, .problem-grid, .charge-grid, .team-featured, .festival-grid { grid-template-columns:1fr; gap:40px; }
+      .solution-grid, .three-col, .partner-grid { grid-template-columns:1fr; }
+      .four-col, .roster-grid, .team-grid { grid-template-columns:1fr 1fr; }
+      .steps { grid-template-columns:1fr 1fr; }
+      .gallery-grid { columns:2; }
+      .logo-break { flex-direction:column; text-align:center; }
+      .footer-top { flex-direction:column; }
+      .footer-bottom { flex-direction:column; text-align:center; }
+    }
+    @media (max-width: 580px) {
+      .four-col, .roster-grid, .team-grid { grid-template-columns:1fr; }
+      .steps { grid-template-columns:1fr; }
+      .gallery-grid { columns:1; }
+      .form-row { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#"><img src="images/logo.png" alt="Headliner Cards" /></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#partner">Partner</a></li>
+      <li><a href="#roster">Why Roster</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#process">Process</a></li>
+    </ul>
+    <a class="nav-cta" href="#apply">Join the Roster</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-slideshow" id="slideshow"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-eyebrow">Artist Representation Network</span>
+      <h1>Your Music.<br/><em>Immortalized.</em></h1>
+      <p class="hero-sub">The trading card world is our lifelong passion. With a decade in the music industry, we built a unique strategy to bridge the gap between Artists, Fans, and Brands.</p>
+      <a class="btn-yellow" href="#apply">Join the Roster</a>
+      <a class="btn-outline-white" href="#partner">Three Ways to Partner</a>
+    </div>
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker">
+      <span class="ticker-item">Headliner Cards</span><span class="ticker-item ticker-sep">✦</span>
+      <span class="ticker-item">Artist Representation Network</span><span class="ticker-item ticker-sep">✦</span>
+      <span class="ticker-item">Official Licensing</span><span class="ticker-item ticker-sep">✦</span>
+      <span class="ticker-item">Flat Fee. No Revenue Split.</span><span class="ticker-item ticker-sep">✦</span>
+      <span class="ticker-item">Festival Partnerships</span><span class="ticker-item ticker-sep">✦</span>
+      <span class="ticker-item">Tour Merch Cards</span><span class="ticker-item ticker-sep">✦</span>
+      <span class="ticker-item">trade@headlinercards.com</span><span class="ticker-item ticker-sep">✦</span>
+      <span class="ticker-item">Headliner Cards</span><span class="ticker-item ticker-sep">✦</span>
+      <span class="ticker-item">Artist Representation Network</span><span class="ticker-item ticker-sep">✦</span>
+      <span class="ticker-item">Official Licensing</span><span class="ticker-item ticker-sep">✦</span>
+      <span class="ticker-item">Flat Fee. No Revenue Split.</span><span class="ticker-item ticker-sep">✦</span>
+      <span class="ticker-item">Festival Partnerships</span><span class="ticker-item ticker-sep">✦</span>
+      <span class="ticker-item">Tour Merch Cards</span><span class="ticker-item ticker-sep">✦</span>
+      <span class="ticker-item">trade@headlinercards.com</span><span class="ticker-item ticker-sep">✦</span>
+    </div>
+  </div>
+
+  <!-- WELCOME -->
+  <section class="welcome-section" id="about">
+    <div class="welcome-inner">
+      <p class="section-label" style="text-align:center;">Welcome</p>
+      <h2>Welcome to Headliner Cards!</h2>
+      <div class="rule" style="margin:0 auto 32px;"></div>
+      <p>I'm so happy you're here. The trading card world is our lifelong passion. With a decade of expertise in the music industry as well, our worlds collided in 2025 and we developed a unique strategy to bridge the gap between <strong>Artists, Fans, Brands, and more.</strong></p>
+    </div>
+  </section>
+
+  <!-- THE PROBLEM -->
+  <section class="problem-section">
+    <div class="inner problem-grid">
+      <div>
+        <p class="section-label">The Problem</p>
+        <h2 class="section-title">Fan-Made Cards<br/>Are <em>Out of Control</em></h2>
+        <div class="rule"></div>
+        <p style="color:var(--muted);font-size:16px;font-weight:300;margin-bottom:32px;">The current trading cards being made by fans are harming artists — and no one is doing anything about it.</p>
+        <ul class="problem-list">
+          <li>
+            <div class="prob-title"><span>01</span> Unlicensed</div>
+            <p class="prob-desc">Made with zero artist consent or approval. Fans print cards using any image they find without permission.</p>
+          </li>
+          <li>
+            <div class="prob-title"><span>02</span> Uncontrolled</div>
+            <p class="prob-desc">Any photo, any rumor, any copy can appear on these cards. Artists have no veto over what gets printed and sold with their name and face.</p>
+          </li>
+          <li>
+            <div class="prob-title"><span>03</span> No Revenue</div>
+            <p class="prob-desc">Artists earn nothing from their likeness in one of the fastest growing collectible categories on the market.</p>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <img src="images/DSC03887.jpg" alt="Performance" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;" />
+      </div>
+    </div>
+  </section>
+
+  <!-- THE SOLUTION -->
+  <section class="solution-section">
+    <div class="inner">
+      <p class="section-label">The Solution</p>
+      <h2 class="section-title">We Represent Artists<br/><em>Like the MLB Players Association</em></h2>
+      <div class="rule"></div>
+      <p class="solution-sub">Headliner Cards represents artists like the MLB Players Association</p>
+      <div class="solution-grid">
+        <div class="solution-item">
+          <div class="sol-num">01</div>
+          <div class="sol-title">Official Licensing</div>
+          <p class="sol-desc">We secure rights to artists' likeness, approved photos, and copy — making every card 100% official.</p>
+        </div>
+        <div class="solution-item">
+          <div class="sol-num">02</div>
+          <div class="sol-title">Artist Creative Control</div>
+          <p class="sol-desc">Artists approve all photography, statistics, and copy before print. Nothing goes out without your sign-off.</p>
+        </div>
+        <div class="solution-item">
+          <div class="sol-num">03</div>
+          <div class="sol-title">Curated Roster Network</div>
+          <p class="sol-desc">We're building a sponsor-ready roster that connects artists to brands, festivals, and collectors at scale.</p>
+        </div>
+        <div class="solution-item">
+          <div class="sol-num">04</div>
+          <div class="sol-title">Flat Fee Model</div>
+          <p class="sol-desc">No revenue splits. Artists pay a flat manufacturing and design fee. Simple, predictable, and fair.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THREE WAYS TO PARTNER -->
+  <section class="partner-section" id="partner">
+    <div class="inner">
+      <p class="section-label">Partnership Tiers</p>
+      <h2 class="section-title">Three Ways<br/>to <em>Partner</em></h2>
+      <div class="rule"></div>
+      <div class="partner-grid">
+
+        <div class="partner-card">
+          <span class="partner-tag">Tour Merch Cards</span>
+          <h3>Tour Merch<br/>Cards</h3>
+          <ul class="partner-list">
+            <li>Official cards for your whole tour</li>
+            <li>Artist approves all creative</li>
+            <li>Cards sold at tour stops</li>
+            <li>Flat manufacturing and design fee</li>
+          </ul>
+        </div>
+
+        <div class="partner-card">
+          <span class="partner-tag red">Festival Representation</span>
+          <div class="partner-badge">🔥 Fastest Growing</div>
+          <h3>Festival<br/>Representation</h3>
+          <ul class="partner-list">
+            <li>Official on-premise at music festivals</li>
+            <li>Exclusivity in collectibles at each event</li>
+            <li>Access to Headliner sponsor network</li>
+            <li>Per-festival flat fee</li>
+          </ul>
+        </div>
+
+        <div class="partner-card">
+          <span class="partner-tag">Year Round Roster</span>
+          <h3>Year Round<br/>Roster</h3>
+          <ul class="partner-list">
+            <li>12-month exclusive contract</li>
+            <li>Rolling card release schedule</li>
+            <li>Priority sponsor &amp; brand access</li>
+            <li>Annual flat fee — no revenue split</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW WE CHARGE -->
+  <section class="charge-section" id="pricing">
+    <div class="inner">
+      <p class="section-label">Pricing Model</p>
+      <h2 class="section-title">How We<br/><em>Charge</em></h2>
+      <div class="rule"></div>
+      <div class="charge-grid">
+        <div class="charge-box yes">
+          <span class="charge-tag yes">Flat Manufacturing + Design Fee</span>
+          <ul class="charge-list yes">
+            <li>You know the cost upfront</li>
+            <li>No revenue split accounting</li>
+            <li>Artists keep 100% of card sales</li>
+            <li>Scales cleanly as the roster grows</li>
+            <li>No conflict of interest</li>
+          </ul>
+        </div>
+        <div class="charge-box no">
+          <span class="charge-tag no">Instead of: Revenue Split Model</span>
+          <ul class="charge-list no">
+            <li>Complex downstream accounting</li>
+            <li>Sales tracking disputes</li>
+            <li>Incentive misalignment</li>
+            <li>Hard to scale across artists</li>
+            <li>Revenue unpredictability</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY ROSTER MATTERS -->
+  <section class="roster-section" id="roster">
+    <div class="inner">
+      <p class="section-label">The Network</p>
+      <h2 class="section-title">Why a Roster<br/><em>Matters</em></h2>
+      <div class="rule"></div>
+      <div class="roster-grid four-col">
+        <div class="roster-item">
+          <span class="roster-tag">Sponsor Access</span>
+          <h3>Sponsor Access</h3>
+          <p>Brands want to activate with artists. We give sponsors a single point of contact for officially licensed music collectibles — and you're on that list.</p>
+        </div>
+        <div class="roster-item">
+          <span class="roster-tag">Festivals</span>
+          <h3>Festival Partnerships</h3>
+          <p>Festivals want exclusive drops. Roster artists get priority placement in our festival deals and merchandise tent strategy.</p>
+        </div>
+        <div class="roster-item">
+          <span class="roster-tag">Collectors</span>
+          <h3>Collector Network</h3>
+          <p>We build the collector audience alongside you. Roster artists benefit from the entire network, not just their own fanbase.</p>
+        </div>
+        <div class="roster-item">
+          <span class="roster-tag">Protection</span>
+          <h3>Brand Protection</h3>
+          <p>Being on the official roster signals legitimacy. No more unlicensed knockoffs competing with your name.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FESTIVAL CONNECTIONS -->
+  <section class="festival-section">
+    <div class="inner">
+      <p class="section-label">On the Ground</p>
+      <h2 class="section-title">Festival<br/><em>Connections</em></h2>
+      <div class="rule"></div>
+      <div class="festival-grid">
+        <div class="festival-box">
+          <h3>Festival Sponsorships</h3>
+          <p>Brand-sponsored meet and greets and activations are on the table — literally. Our goal is to bring a real attraction to the brand activation footprint and get artists compensated for their time.</p>
+        </div>
+        <div class="festival-box">
+          <h3>Festival Merchandise</h3>
+          <p>Festival merchandise is always a difficult logistic — especially for mid-sized artists with no full merch team. Our goal is to represent a roster of artists and offer easy <strong>pack in and pack out logistics.</strong></p>
+          <p><em>We understand this as being one of the toughest parts of selling artist merch at festivals.</em></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY / CRSSD -->
+  <section class="gallery-section">
+    <div class="inner">
+      <p class="section-label">Recent Sponsorship</p>
+      <h2 class="section-title">Sierra Nevada<br/><em>x CRSSD</em></h2>
+      <div class="rule"></div>
+      <p class="section-sub">We teamed up with Sierra Nevada Brewing Company on a sponsorship that has already started to create an impact in the music industry.</p>
+    </div>
+    <div class="gallery-grid">
+      <img src="images/DSC03244.jpg" alt="CRSSD" />
+      <img src="images/DSC03437.jpg" alt="CRSSD" />
+      <img src="images/DSC04421.jpg" alt="CRSSD" />
+      <img src="images/DSC03278.jpg" alt="CRSSD" />
+      <img src="images/DSC03602.jpg" alt="CRSSD" />
+      <img src="images/DSC03842.jpg" alt="CRSSD" />
+      <img src="images/DSC03340.jpg" alt="CRSSD" />
+      <img src="images/DSC03554.jpg" alt="CRSSD" />
+      <img src="images/DSC04375.jpg" alt="CRSSD" />
+      <img src="images/DSC03734.jpg" alt="CRSSD" />
+      <img src="images/DSC04190.jpg" alt="CRSSD" />
+    </div>
+  </section>
+
+  <!-- THE CARDS (product) -->
+  <section style="background:var(--off);border-top:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center;" id="cards">
+    <p class="section-label">The Product</p>
+    <h2 class="section-title">Tour Merch Options</h2>
+    <div class="rule" style="margin:0 auto 44px;"></div>
+    <div style="display:flex;justify-content:center;gap:56px;flex-wrap:wrap;max-width:900px;margin:0 auto;">
+      <div style="max-width:340px;">
+        <img src="images/card-front.jpg" alt="Single Card" style="width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.12);margin-bottom:20px;" />
+        <h3 style="font-weight:900;font-size:18px;text-transform:uppercase;margin-bottom:8px;">Single Card with Collector's Case</h3>
+        <p style="font-size:14px;color:var(--muted);font-weight:300;">Great for one-off shows and major events.</p>
+      </div>
+      <div style="max-width:340px;">
+        <img src="images/card-back.jpg" alt="Card Pack" style="width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.12);margin-bottom:20px;" />
+        <h3 style="font-weight:900;font-size:18px;text-transform:uppercase;margin-bottom:8px;">Collector Card Pack</h3>
+        <p style="font-size:14px;color:var(--muted);font-weight:300;">Great for a full tour and building out a whole world with your fans and artistry.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process-section" id="process">
+    <div class="inner">
+      <p class="section-label">The Process</p>
+      <h2 class="section-title">From Handshakes to<br/><em>Cards in Hands</em></h2>
+      <div class="rule"></div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-title">Meeting</div>
+          <p class="step-desc">Discuss representation, exclusivity, and fees. We'll reach out within 48 hours of your application.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-title">Contract</div>
+          <p class="step-desc">Sign an artist-first rights agreement. You keep creative control at every stage.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-title">Design</div>
+          <p class="step-desc">Mockups and approval rounds. Nothing goes to print without your full sign-off.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-title">Print</div>
+          <p class="step-desc">Production and quality check. Premium soft-touch laminated cards ready for your show.</p>
+        </div>
+      </div>
+      <p class="process-cta">Target: <strong>4–6 weeks from first meeting to cards at your first tour stop.</strong></p>
+    </div>
+  </section>
+
+  <!-- LOGO BREAK -->
+  <div class="logo-break">
+    <img src="images/logo.png" alt="Headliner Cards" />
+    <div class="logo-break-text">
+      <p>The first trading card<br/>company <span>built for music.</span></p>
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <section class="team-section" id="team">
+    <div class="inner">
+      <p class="section-label">The Team</p>
+      <h2 class="section-title">Who's<br/><em>Behind This</em></h2>
+      <div class="rule"></div>
+
+      <!-- Kevin featured -->
+      <div class="team-featured">
+        <div class="team-text">
+          <h3 style="font-weight:900;font-size:clamp(28px,4vw,48px);margin-bottom:8px;">Kevin Charles Macaraeg</h3>
+          <p class="role">Co-Founder · Designer · Creative Director · Trading Card Nerd</p>
+          <p>Lifelong music industry innovator. MTV Contest winning designer. Festival and tour photographer.</p>
+          <p>Past full-time companies include <strong>Snapchat Inc</strong> and <strong>Sony Music's The Orchard</strong>. Past artists worked with include <strong>Oasis, Sammy Virji, BTS, Franc Moody, Jungle.</strong> Past freelance clients include <strong>Don Julio Tequila, VICE Media, Ultra Records.</strong></p>
+          <span class="highlight">10 years into the music industry</span>
+        </div>
+        <div>
+          <a href="https://www.akaer.studio/" target="_blank" rel="noopener" class="site-preview-link">
+            <div class="site-preview">
+              <div class="browser-bar">
+                <div class="browser-dots">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="browser-url">akaer.studio</div>
+              </div>
+              <div class="browser-viewport">
+                <iframe src="https://www.akaer.studio/" scrolling="no" tabindex="-1"></iframe>
+              </div>
+              <div class="preview-overlay">
+                <span>View Portfolio →</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Rest of team -->
+      <div class="team-grid">
+        <div class="team-member">
+          <h3>Brendon Jasso</h3>
+          <p class="role">Co-Founder &amp; Director of Operations</p>
+          <p>Trading card, sports, and music enthusiast. Operations lead with experience in executive leadership, partnerships, and technical project execution across B2C and B2B environments. Managed + facilitated $16M in revenue over 7 years and raised $3.25M in public funding initiatives for California charter schools.</p>
+        </div>
+        <div class="team-member">
+          <h3>Ryan Hambsch</h3>
+          <p class="role">Music Industry Advisor</p>
+          <p>Accomplished music manager with a thorough understanding of international music business. With two decades of management experience, Ryan has worked alongside Moby, Robyn, The Blessed Madonna, Shouse, and Royksopp.</p>
+        </div>
+        <div class="team-member">
+          <h3>Liv Johnson</h3>
+          <p class="role">Festival Advisor</p>
+          <p>Lifetime experience throwing festivals. Head boss of Almost Nakey. 2 festivals per year: San Diego Santa Con &amp; Freedom Fest.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="form-section" id="apply">
+    <p class="section-label">Artist Applications</p>
+    <h2 class="section-title">Join the Roster</h2>
+    <div class="rule"></div>
+    <p class="form-sub">Tell us about yourself. We review every application and reach out to artists that are the right fit for the Headliner Cards roster.</p>
+    <form class="artist-form" id="artistForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Artist / Band Name *</label>
+          <input type="text" name="artist_name" required placeholder="Your stage name" />
+        </div>
+        <div class="form-group">
+          <label>Contact Name *</label>
+          <input type="text" name="contact_name" required placeholder="You or your manager" />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email *</label>
+          <input type="email" name="email" required placeholder="your@email.com" />
+        </div>
+        <div class="form-group">
+          <label>Phone</label>
+          <input type="tel" name="phone" placeholder="(555) 000-0000" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Which Partnership Are You Interested In? *</label>
+        <select name="partnership" required>
+          <option value="" disabled selected>Select a tier</option>
+          <option>Tour Merch Cards</option>
+          <option>Festival Representation</option>
+          <option>Year Round Roster</option>
+          <option>Not sure yet — let's talk</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Genre / Style *</label>
+        <select name="genre" required>
+          <option value="" disabled selected>Select your genre</option>
+          <option>Electronic / Dance / EDM</option>
+          <option>Hip-Hop / Rap</option>
+          <option>Rock / Alternative</option>
+          <option>Pop</option>
+          <option>R&B / Soul</option>
+          <option>Jazz / Blues</option>
+          <option>Country / Folk</option>
+          <option>Latin</option>
+          <option>Reggae</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Instagram Handle</label>
+          <input type="text" name="instagram" placeholder="@yourhandle" />
+        </div>
+        <div class="form-group">
+          <label>Fan Base Size</label>
+          <select name="fanbase">
+            <option value="" disabled selected>Approximate reach</option>
+            <option>Under 10K</option>
+            <option>10K – 50K</option>
+            <option>50K – 250K</option>
+            <option>250K – 1M</option>
+            <option>1M+</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Upcoming Shows / Tours / Festivals</label>
+        <input type="text" name="upcoming_shows" placeholder="e.g. EDC Las Vegas, Outside Lands, Bonnaroo 2026" />
+      </div>
+      <div class="form-group">
+        <label>Tell Us About Yourself</label>
+        <textarea name="bio" placeholder="Share your story, what makes you a Headliner, and why now is the right time for your card..."></textarea>
+      </div>
+      <button type="submit" class="form-submit">Submit Application →</button>
+      <p class="form-fine">By submitting you agree to be contacted by Headliner Cards. Questions? <a href="mailto:trade@headlinercards.com">trade@headlinercards.com</a></p>
+      <div class="success-msg" id="successMsg">Application received — we'll be in touch within 48 hours.</div>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-logo"><img src="images/logo.png" alt="Headliner Cards" /></div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="#about">About</a>
+        <a href="#partner">Ways to Partner</a>
+        <a href="#roster">Why Roster</a>
+        <a href="#process">Process</a>
+        <a href="#team">Team</a>
+        <a href="#apply">Join the Roster</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:trade@headlinercards.com">trade@headlinercards.com</a>
+        <a href="tel:18582314427">(858) 231-4427</a>
+        <a href="#">831 Chalcedony St, San Diego, CA 92109</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Headliner Cards. All rights reserved.</p>
+      <p class="footer-tagline">Music. Cards. Legacy.</p>
+    </div>
+  </footer>
+
+  <script>
+    const slides = [
+      'images/DSC04421.jpg','images/DSC03887.jpg','images/DSC03842.jpg',
+      'images/DSC03734.jpg','images/DSC04375.jpg','images/DSC03602.jpg',
+    ];
+    const ss = document.getElementById('slideshow');
+    slides.forEach((src, i) => {
+      const d = document.createElement('div');
+      d.className = 'hero-slide' + (i === 0 ? ' active' : '');
+      d.style.backgroundImage = `url('${src}')`;
+      ss.appendChild(d);
+    });
+    let cur = 0;
+    setInterval(() => {
+      const all = ss.querySelectorAll('.hero-slide');
+      all[cur].classList.remove('active');
+      cur = (cur + 1) % slides.length;
+      all[cur].classList.add('active');
+    }, 4500);
+
+    document.getElementById('artistForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const btn = this.querySelector('.form-submit');
+      btn.textContent = 'Sending...'; btn.disabled = true;
+      setTimeout(() => {
+        this.reset();
+        btn.textContent = 'Submit Application →'; btn.disabled = false;
+        const msg = document.getElementById('successMsg');
+        msg.style.display = 'block';
+        msg.scrollIntoView({ behavior:'smooth', block:'center' });
+      }, 1200);
+    });
+  </script>
+</body>
+</html>
