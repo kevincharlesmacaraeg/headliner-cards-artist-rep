@@ -3,556 +3,279 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Headliner Cards — For Festivals & Promoters</title>
+  <title>Headliner Cards — For Festivals &amp; Promoters</title>
+  <meta name="description" content="Officially licensed trading cards for your festival lineup — artist-approved, on-premise exclusive, sponsor-ready. Pack-in / pack-out — no merch team required." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,700;0,900;1,700;1,900&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --yellow: #FFE500; --red: #E8000D; --black: #0A0A0A;
-      --white: #FFFFFF; --off: #F5F5F3; --light: #EBEBEA;
-      --muted: #777777; --border: #E0E0DE;
-    }
-    html { scroll-behavior: smooth; }
-    body { background: var(--white); color: var(--black); font-family: 'Chivo', sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; }
-
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: var(--white); border-bottom: 1px solid var(--border); box-shadow: 0 1px 12px rgba(0,0,0,0.06); }
-    .nav-back { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; white-space: nowrap; }
-    .nav-back:hover { color: var(--red); }
-    .nav-logo img { height: 36px; width: auto; display: block; }
-    .nav-links { display: flex; gap: 32px; list-style: none; }
-    .nav-links a { color: var(--black); text-decoration: none; font-weight: 700; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--red); }
-    .nav-cta { background: var(--red); color: var(--white); font-weight: 900; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; padding: 11px 26px; text-decoration: none; transition: opacity 0.2s; }
-    .nav-cta:hover { opacity: 0.85; }
-
-    .hero { position: relative; height: 92vh; min-height: 620px; margin-top: 68px; display: flex; align-items: flex-end; overflow: hidden; }
-    .hero-slideshow { position: absolute; inset: 0; }
-    .hero-slide { position: absolute; inset: 0; background-size: cover; background-position: center 20%; opacity: 0; transition: opacity 1.4s ease-in-out; }
-    .hero-slide.active { opacity: 1; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 55%, rgba(0,0,0,0.1) 100%); z-index: 1; }
-    .hero-content { position: relative; z-index: 2; padding: 0 56px 72px; max-width: 900px; }
-    .hero-eyebrow { display: inline-block; background: var(--yellow); color: var(--black); font-size: 11px; font-weight: 900; letter-spacing: 0.22em; text-transform: uppercase; padding: 6px 14px; margin-bottom: 24px; }
-    .hero h1 { font-weight: 900; font-size: clamp(48px, 8vw, 100px); line-height: 0.93; text-transform: uppercase; color: var(--white); margin-bottom: 28px; }
-    .hero h1 em { font-style: italic; color: var(--yellow); }
-    .hero-sub { font-size: 18px; color: rgba(255,255,255,0.75); max-width: 560px; margin-bottom: 40px; font-weight: 300; line-height: 1.75; }
-    .btn-yellow { display: inline-block; background: var(--yellow); color: var(--black); font-weight: 900; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; padding: 16px 36px; text-decoration: none; margin-right: 12px; transition: opacity 0.2s; }
-    .btn-yellow:hover { opacity: 0.88; }
-    .btn-outline-white { display: inline-block; border: 2px solid rgba(255,255,255,0.4); color: var(--white); font-weight: 700; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; padding: 14px 36px; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
-    .btn-outline-white:hover { border-color: var(--yellow); color: var(--yellow); }
-
-    .ticker-wrap { overflow: hidden; background: var(--black); padding: 13px 0; }
-    .ticker { display: flex; animation: ticker 36s linear infinite; width: max-content; }
-    .ticker-item { font-weight: 700; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--white); padding: 0 28px; white-space: nowrap; }
-    .ticker-sep { color: var(--yellow); }
-    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-    section { padding: 96px 56px; }
-    .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--red); margin-bottom: 14px; }
-    .section-title { font-weight: 900; font-size: clamp(36px, 5vw, 68px); line-height: 0.95; text-transform: uppercase; color: var(--black); margin-bottom: 20px; }
-    .section-title em { font-style: italic; color: var(--red); }
-    .rule { width: 40px; height: 4px; background: var(--yellow); margin-bottom: 44px; }
-    .inner { max-width: 1200px; margin: 0 auto; }
-
-    .welcome-section { background: var(--off); border-bottom: 1px solid var(--border); }
-    .welcome-inner { max-width: 760px; margin: 0 auto; text-align: center; }
-    .welcome-inner h2 { font-weight: 900; font-size: clamp(28px, 4vw, 48px); margin-bottom: 24px; line-height: 1.1; }
-    .welcome-inner p { font-size: 19px; color: #555; line-height: 1.8; font-weight: 300; }
-    .welcome-inner p strong { color: var(--black); font-weight: 700; }
-
-    .problem-section { background: var(--white); }
-    .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
-    .problem-list { list-style: none; margin-top: 8px; }
-    .problem-list li { padding: 20px 0; border-bottom: 1px solid var(--border); }
-    .problem-list li:last-child { border-bottom: none; }
-    .prob-title { font-weight: 900; font-size: 18px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
-    .prob-title span { display: inline-block; background: var(--red); color: var(--white); font-size: 10px; font-weight: 900; letter-spacing: 0.1em; padding: 2px 8px; margin-right: 10px; vertical-align: middle; }
-    .prob-desc { font-size: 15px; color: var(--muted); line-height: 1.65; font-weight: 300; }
-
-    .solution-section { background: var(--black); }
-    .solution-section .section-label { color: var(--yellow); }
-    .solution-section .section-title { color: var(--white); }
-    .solution-section .section-title em { color: var(--yellow); font-style: normal; }
-    .solution-section .rule { background: var(--red); }
-    .solution-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; background: #1a1a1a; border: 1px solid #1a1a1a; }
-    .solution-item { background: #111; padding: 36px 32px; border-top: 3px solid transparent; transition: border-color 0.2s; }
-    .solution-item:hover { border-color: var(--yellow); }
-    .sol-num { font-weight: 900; font-size: 11px; letter-spacing: 0.2em; color: var(--red); margin-bottom: 10px; }
-    .sol-title { font-weight: 900; font-size: 19px; text-transform: uppercase; color: var(--white); margin-bottom: 10px; }
-    .sol-desc { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.7; font-weight: 300; }
-
-    .offer-section { background: var(--off); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .offer-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 56px; }
-    .offer-card { background: var(--white); padding: 44px 36px; position: relative; }
-    .offer-tag { display: inline-block; background: var(--yellow); color: var(--black); font-weight: 900; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 14px; margin-bottom: 24px; }
-    .offer-tag.red { background: var(--red); color: var(--white); }
-    .offer-badge { position: absolute; top: 44px; right: 36px; background: var(--red); color: var(--white); font-size: 9px; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 10px; }
-    .offer-card h3 { font-weight: 900; font-size: 22px; text-transform: uppercase; margin-bottom: 20px; }
-    .offer-list { list-style: none; }
-    .offer-list li { font-size: 14px; color: #555; padding: 8px 0; border-bottom: 1px solid var(--border); line-height: 1.5; display: flex; gap: 10px; align-items: baseline; font-weight: 300; }
-    .offer-list li:last-child { border-bottom: none; }
-    .offer-list li::before { content: '→'; color: var(--red); font-weight: 700; flex-shrink: 0; }
-
-    .gallery-section { background: var(--black); }
-    .gallery-section .section-label { color: var(--yellow); }
-    .gallery-section .section-title { color: var(--white); }
-    .gallery-section .section-title em { color: var(--yellow); font-style: normal; }
-    .gallery-section .rule { background: var(--red); }
-    .gallery-section .section-sub { color: rgba(255,255,255,0.45); font-size:16px; font-weight:300; max-width:520px; }
-    .gallery-grid { columns: 3; gap: 6px; max-width: 1400px; margin: 48px auto 0; }
-    .gallery-grid img { width:100%; display:block; margin-bottom:6px; object-fit:cover; transition: opacity 0.3s; }
-    .gallery-grid img:hover { opacity: 0.8; }
-
-    .process-section { background: var(--off); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .steps { display:grid; grid-template-columns: repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); margin-top:56px; }
-    .step { background: var(--white); padding: 44px 32px; text-align: center; }
-    .step-num { font-weight:900; font-size:56px; color:rgba(232,0,13,0.1); line-height:1; margin-bottom:12px; }
-    .step-title { font-weight:900; font-size:18px; text-transform:uppercase; color:var(--black); margin-bottom:10px; }
-    .step-desc { font-size:14px; color:var(--muted); line-height:1.7; font-weight:300; }
-    .process-cta { text-align:center; margin-top:40px; font-weight:700; font-size:16px; color:var(--black); }
-    .process-cta strong { color: var(--red); }
-
-    .team-section { background: var(--white); }
-    .team-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:48px; }
-    .team-member h3 { font-weight:900; font-size:22px; margin-bottom:4px; }
-    .team-member .role { font-size:13px; color:var(--muted); font-weight:400; margin-bottom:14px; }
-    .team-member p { font-size:14px; color:#666; line-height:1.75; font-weight:300; }
-    .team-intro { max-width:640px; margin-bottom:56px; }
-    .team-intro p { font-size:17px; color:#555; line-height:1.8; font-weight:300; }
-
-    .logo-break { background: var(--yellow); border-top: 3px solid var(--red); border-bottom: 3px solid var(--red); padding: 52px 56px; display: flex; align-items:center; justify-content:center; gap:56px; flex-wrap:wrap; }
-    .logo-break img { width: min(300px, 45vw); }
-    .logo-break-text p { font-weight:900; font-size:clamp(18px,2.6vw,26px); text-transform:uppercase; letter-spacing:0.04em; color:var(--black); line-height:1.25; }
-    .logo-break-text p span { color:var(--red); }
-
-    .form-section { background: var(--off); border-top: 1px solid var(--border); text-align:center; }
-    .form-section .rule { margin:0 auto 44px; background:var(--red); }
-    .form-sub { color:var(--muted); font-size:16px; max-width:480px; margin:0 auto 56px; font-weight:300; }
-    .contact-form { max-width:660px; margin:0 auto; text-align:left; }
-    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-    .form-group { margin-bottom:14px; }
-    .form-group label { display:block; font-size:11px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:7px; }
-    .form-group input, .form-group select, .form-group textarea { width:100%; background:var(--white); border:1px solid var(--border); color:var(--black); font-family:'Chivo',sans-serif; font-size:15px; padding:13px 16px; outline:none; appearance:none; -webkit-appearance:none; transition:border-color 0.2s, box-shadow 0.2s; }
-    .form-group select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23aaa' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; padding-right:36px; }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--black); box-shadow:0 0 0 2px rgba(10,10,10,0.08); }
-    .form-group textarea { resize:vertical; min-height:110px; }
-    .form-submit { width:100%; background:var(--black); color:var(--white); border:2px solid var(--black); font-family:'Chivo',sans-serif; font-weight:900; font-size:16px; letter-spacing:0.14em; text-transform:uppercase; padding:18px; cursor:pointer; margin-top:6px; transition:background 0.2s, border-color 0.2s; }
-    .form-submit:hover { background:var(--red); border-color:var(--red); }
-    .form-fine { text-align:center; font-size:12px; color:#aaa; margin-top:14px; }
-    .form-fine a { color:var(--black); text-decoration:underline; }
-    .success-msg { display:none; background:#F0FFF4; border:1px solid #2D9249; color:#1A6B33; font-weight:700; font-size:14px; letter-spacing:0.06em; text-transform:uppercase; padding:20px; text-align:center; margin-top:14px; }
-
-    footer { background:var(--black); padding:56px 56px 36px; }
-    .footer-top { display:flex; align-items:flex-start; justify-content:space-between; gap:40px; flex-wrap:wrap; padding-bottom:48px; border-bottom:1px solid #222; margin-bottom:32px; }
-    .footer-logo img { height:48px; width:auto; display:block; }
-    .footer-col h4 { font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
-    .footer-col a { display:block; font-size:14px; color:rgba(255,255,255,0.5); text-decoration:none; margin-bottom:10px; transition:color 0.2s; }
-    .footer-col a:hover { color:var(--yellow); }
-    .footer-bottom { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
-    .footer-bottom p { font-size:12px; color:#444; }
-    .footer-tagline { font-size:11px; font-weight:900; letter-spacing:0.22em; text-transform:uppercase; color:var(--yellow); }
-
-    @media (max-width: 960px) {
-      nav { padding: 0 20px; }
-      .nav-links { display: none; }
-      section { padding: 72px 24px; }
-      .hero-content { padding: 0 24px 56px; }
-      .problem-grid { grid-template-columns:1fr; gap:40px; }
-      .solution-grid, .offer-grid { grid-template-columns:1fr; }
-      .team-grid { grid-template-columns:1fr 1fr; }
-      .steps { grid-template-columns:1fr 1fr; }
-      .gallery-grid { columns:2; }
-      .logo-break { flex-direction:column; text-align:center; }
-      .footer-top { flex-direction:column; }
-      .footer-bottom { flex-direction:column; text-align:center; }
-    }
-    @media (max-width: 580px) {
-      .team-grid { grid-template-columns:1fr; }
-      .steps { grid-template-columns:1fr; }
-      .gallery-grid { columns:1; }
-      .form-row { grid-template-columns:1fr; }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <nav>
-    <a class="nav-back" href="index.html">← All Audiences</a>
-    <a class="nav-logo" href="festival.html"><img src="images/logo.png" alt="Headliner Cards" /></a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#what-you-get">What You Get</a></li>
-      <li><a href="#case-study">Case Study</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#team">Team</a></li>
-    </ul>
-    <a class="nav-cta" href="#apply">Get a Proposal</a>
-  </nav>
+<div class="utility-bar">
+  <div class="container">
+    <p class="utility-tagline">The first trading card company built for <span>music</span></p>
+    <a href="mailto:trade@headlinercards.com">trade@headlinercards.com</a>
+  </div>
+</div>
 
-  <div class="hero">
-    <div class="hero-slideshow" id="slideshow"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <span class="hero-eyebrow">For Festivals &amp; Promoters</span>
-      <h1>Make Your Festival<br/><em>Official.</em></h1>
-      <p class="hero-sub">We create officially licensed trading cards for your festival lineup — sold on-premise, artist-approved, and backed by a brand sponsor network ready to co-sign the drop.</p>
-      <a class="btn-yellow" href="#apply">Get a Festival Proposal</a>
-      <a class="btn-outline-white" href="#case-study">See Sierra Nevada × CRSSD</a>
+<header class="nav">
+  <div class="container nav-row">
+    <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Headliner Cards" /></a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="artist.html">Artists</a></li>
+        <li><a href="festival.html" style="color:var(--red);border-bottom-color:var(--red);">Festivals</a></li>
+        <li><a href="label.html">Labels</a></li>
+        <li><a href="sponsor.html">Sponsors</a></li>
+        <li><a href="index.html#about">About</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a href="#apply" class="btn btn-red nav-cta-mobile-hidden">Get a Proposal</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
   </div>
+</header>
 
-  <div class="ticker-wrap">
-    <div class="ticker">
-      <span class="ticker-item">Official Festival Cards</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">Licensed Artist Photography</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">On-Premise Exclusivity</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">Brand Sponsor Network</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">Pack-In / Pack-Out Logistics</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">Fastest Growing Partnership Tier</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">trade@headlinercards.com</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">Official Festival Cards</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">Licensed Artist Photography</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">On-Premise Exclusivity</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">Brand Sponsor Network</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">Pack-In / Pack-Out Logistics</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">Fastest Growing Partnership Tier</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">trade@headlinercards.com</span><span class="ticker-item ticker-sep">✦</span>
+<section class="hero">
+  <div class="hero-media" style="background-image: url('images/14-activation-wide-bubbles-crowd.jpg');"></div>
+  <div class="hero-inner">
+    <span class="hero-eyebrow">Step 02 · Festival / Promoter</span>
+    <h1>Make your festival official.</h1>
+    <p class="hero-sub">We create officially licensed trading cards for your festival lineup — sold on-premise, artist-approved, and backed by a brand sponsor network ready to co-sign the drop.</p>
+    <div class="hero-actions">
+      <a href="#apply" class="btn btn-red">Get a Festival Proposal</a>
+      <a href="#case-study" class="btn btn-outline-light">See Sierra Nevada × CRSSD</a>
     </div>
   </div>
+</section>
 
-  <section class="welcome-section" id="about">
-    <div class="welcome-inner">
-      <p class="section-label" style="text-align:center;">The Opportunity</p>
-      <h2>Your Lineup Deserves<br/>an Official Collectible.</h2>
-      <div class="rule" style="margin:0 auto 32px;"></div>
-      <p>Sports has had officially licensed trading cards for decades. Music festivals have apparel. We're changing that — bringing <strong>official, artist-approved trading cards</strong> directly into your festival footprint with exclusive on-premise drops that create real lines, real buzz, and a new revenue tool for your sponsors.</p>
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head section-head--center">
+      <span class="eyebrow">The Opportunity</span>
+      <h2 class="section-title">Your lineup deserves an official collectible.</h2>
+      <p class="section-sub" style="margin-left:auto;margin-right:auto;">Sports has had officially licensed trading cards for decades. Music festivals have apparel. We're changing that — bringing <strong>official, artist-approved trading cards</strong> into your festival footprint with exclusive on-premise drops that create real lines and a new revenue tool for your sponsors.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="problem-section">
-    <div class="inner problem-grid">
+<section class="section">
+  <div class="container">
+    <div class="split-grid">
       <div>
-        <p class="section-label">The Gap</p>
-        <h2 class="section-title">Festivals Don't Have<br/><em>Official Collectibles</em></h2>
-        <div class="rule"></div>
-        <p style="color:var(--muted);font-size:16px;font-weight:300;margin-bottom:32px;">Your lineup is the product. But there's no official collectible built around it — and the vacuum is already being filled by the wrong people.</p>
+        <span class="eyebrow">The Gap</span>
+        <h2 class="section-title">Festivals don't have official collectibles.</h2>
+        <p class="section-sub" style="margin-bottom:24px;">Your lineup is the product. But there's no official collectible built around it — and the vacuum is already being filled by the wrong people.</p>
         <ul class="problem-list">
-          <li>
-            <div class="prob-title"><span>01</span> Uncontrolled Content</div>
-            <p class="prob-desc">Fan photographers flood social with unlicensed shots of your performers — with zero rights clearance, zero revenue, and zero quality control attached to your event's name.</p>
-          </li>
-          <li>
-            <div class="prob-title"><span>02</span> Missed Merch Category</div>
-            <p class="prob-desc">Festival merch is dominated by tees and hoodies. There's no collectible product in the market built around the actual lineup — the artists who define your identity.</p>
-          </li>
-          <li>
-            <div class="prob-title"><span>03</span> Untapped Sponsor Vehicle</div>
-            <p class="prob-desc">Brand sponsors want activations fans remember beyond Monday. Tents, samples, and photo booths blur together. There's no product tying a sponsor's logo to your artists in a format people actually keep.</p>
-          </li>
+          <li><span class="problem-num">01</span><h4>Uncontrolled Content</h4><p>Fan photographers flood social with unlicensed shots of your performers — zero rights clearance, zero quality control attached to your event's name.</p></li>
+          <li><span class="problem-num">02</span><h4>Missed Merch Category</h4><p>Festival merch is dominated by tees and hoodies. There's no collectible product built around the actual lineup — the artists who define your identity.</p></li>
+          <li><span class="problem-num">03</span><h4>Untapped Sponsor Vehicle</h4><p>Brand sponsors want activations fans remember beyond Monday. There's no product tying a sponsor's logo to your artists in a format people actually keep.</p></li>
         </ul>
       </div>
-      <div>
-        <img src="images/14-activation-wide-bubbles-crowd.jpg" alt="Festival Crowd" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center;" />
-      </div>
-    </div>
-  </section>
-
-  <section class="solution-section">
-    <div class="inner">
-      <p class="section-label">The Solution</p>
-      <h2 class="section-title">Official Cards.<br/><em>Built Around Your Lineup.</em></h2>
-      <div class="rule"></div>
-      <div class="solution-grid">
-        <div class="solution-item">
-          <div class="sol-num">01</div>
-          <div class="sol-title">Official Artist Licensing</div>
-          <p class="sol-desc">Every card is fully licensed. We handle all artist approvals and rights clearance so you never deal with a permissions issue.</p>
-        </div>
-        <div class="solution-item">
-          <div class="sol-num">02</div>
-          <div class="sol-title">On-Premise Exclusivity</div>
-          <p class="sol-desc">Your festival is the only place to get these cards. That exclusivity creates urgency, collector demand, and genuine buzz at the event.</p>
-        </div>
-        <div class="solution-item">
-          <div class="sol-num">03</div>
-          <div class="sol-title">Sponsor Integration</div>
-          <p class="sol-desc">Cards are a ready-made sponsor vehicle. A brand can co-sign the drop, sponsor the booth, or be printed right on the back of every card.</p>
-        </div>
-        <div class="solution-item">
-          <div class="sol-num">04</div>
-          <div class="sol-title">Pack-In / Pack-Out Logistics</div>
-          <p class="sol-desc">We handle production, booth setup, and staffing. No merch team required on your end. We show up and run it.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="offer-section" id="what-you-get">
-    <div class="inner">
-      <p class="section-label">What You Get</p>
-      <h2 class="section-title">Three Ways<br/>to <em>Partner</em></h2>
-      <div class="rule"></div>
-      <div class="offer-grid">
-        <div class="offer-card">
-          <span class="offer-tag">Lineup Drop</span>
-          <h3>Official Lineup<br/>Card Set</h3>
-          <ul class="offer-list">
-            <li>Licensed cards for your headliners and key acts</li>
-            <li>Sold exclusively on-premise at your event</li>
-            <li>Artist-approved photography and copy</li>
-            <li>Single card or collector pack format</li>
-          </ul>
-        </div>
-        <div class="offer-card">
-          <span class="offer-tag red">Festival Activation</span>
-          <div class="offer-badge">🔥 Most Popular</div>
-          <h3>Branded Booth<br/>Activation</h3>
-          <ul class="offer-list">
-            <li>Full booth setup and staffing by Headliner Cards</li>
-            <li>Sponsor co-branding on all materials</li>
-            <li>Live card distribution and collector experience</li>
-            <li>Pack-in / pack-out — zero festival staff needed</li>
-          </ul>
-        </div>
-        <div class="offer-card">
-          <span class="offer-tag">Multi-Year</span>
-          <h3>Annual Festival<br/>Partnership</h3>
-          <ul class="offer-list">
-            <li>Multi-year deal with rolling card drops</li>
-            <li>Priority access to Headliner's sponsor network</li>
-            <li>Year-over-year collector continuity</li>
-            <li>Exclusive category — no competitor access</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="gallery-section" id="case-study">
-    <div class="inner">
-      <p class="section-label">Case Study</p>
-      <h2 class="section-title">Sierra Nevada<br/><em>x CRSSD</em></h2>
-      <div class="rule"></div>
-      <p class="section-sub">We activated with Sierra Nevada Brewing Company at CRSSD Festival — a fully branded on-premise trading card drop that drew lines, earned press, and gave attendees something to take home. This is what a festival activation looks like.</p>
-    </div>
-    <div class="gallery-grid">
-      <img src="images/02-hideaway-signage-palms.jpg" alt="CRSSD" />
-      <img src="images/14-activation-wide-bubbles-crowd.jpg" alt="CRSSD" />
-      <img src="images/06-fan-celebrating-rainbow-fan.jpg" alt="CRSSD" />
-      <img src="images/33-couple-cards-case-hideaway.jpg" alt="CRSSD" />
-      <img src="images/27-full-team-hideaway-group.jpg" alt="CRSSD" />
-      <img src="images/04-activation-table-crowd-daylight.jpg" alt="CRSSD" />
-      <img src="images/17-hideaway-setup-wide-banner.jpg" alt="CRSSD" />
-      <img src="images/15-winner-celebration-crowd-cheer.jpg" alt="CRSSD" />
-      <img src="images/11-collect-the-culture-cards-detail.jpg" alt="CRSSD" />
-      <img src="images/22-group-pose-hideaway.jpg" alt="CRSSD" />
-      <img src="images/05-festival-crowd-hazy-ipa-booth.jpg" alt="CRSSD" />
-      <img src="images/01-team-portrait-hideaway-entrance.jpg" alt="CRSSD" />
-      <img src="images/03-fan-collector-card-pose.jpg" alt="CRSSD" />
-      <img src="images/13-couple-card-reveal-bubbles.jpg" alt="CRSSD" />
-      <img src="images/25-trio-cheers-hideaway-moment.jpg" alt="CRSSD" />
-      <img src="images/28-trio-cards-case-hideaway.jpg" alt="CRSSD" />
-      <img src="images/29-pair-cards-case-golden-hour.jpg" alt="CRSSD" />
-      <img src="images/31-trio-cards-case-reaching.jpg" alt="CRSSD" />
-      <img src="images/09-sierra-nevada-can-koozie-cards.jpg" alt="CRSSD" />
-      <img src="images/18-pair-portrait-hideaway-sign.jpg" alt="CRSSD" />
-      <img src="images/24-group-pose-psychedelic.jpg" alt="CRSSD" />
-      <img src="images/26-trio-laughing-hideaway-sign.jpg" alt="CRSSD" />
-      <img src="images/20-crew-fans-hideaway-entrance.jpg" alt="CRSSD" />
-      <img src="images/30-pair-cards-case-sunset.jpg" alt="CRSSD" />
-    </div>
-  </section>
-
-  <section class="process-section" id="process">
-    <div class="inner">
-      <p class="section-label">The Process</p>
-      <h2 class="section-title">From Lineup Confirmation<br/><em>to Cards on the Ground</em></h2>
-      <div class="rule"></div>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-title">Lineup Review</div>
-          <p class="step-desc">Share your confirmed lineup. We identify the right artists for the first drop and build a card set concept.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-title">Artist Approvals</div>
-          <p class="step-desc">We secure all photography rights and artist sign-offs. You stay out of the weeds — we handle the licensing.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-title">Design & Print</div>
-          <p class="step-desc">Cards designed, approved, and printed. Premium soft-touch laminated finish. Ready 2 weeks before your event.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <div class="step-title">On-Site Activation</div>
-          <p class="step-desc">We arrive with the booth, staff the activation, and integrate with your sponsor footprint. Full pack-in / pack-out.</p>
-        </div>
-      </div>
-      <p class="process-cta">Target: <strong>6–8 weeks from confirmed lineup to cards in attendees' hands.</strong></p>
-    </div>
-  </section>
-
-  <div class="logo-break">
-    <img src="images/logo.png" alt="Headliner Cards" />
-    <div class="logo-break-text">
-      <p>The first trading card<br/>company <span>built for music.</span></p>
+      <div class="split-image" style="background-image: url('images/14-activation-wide-bubbles-crowd.jpg');"></div>
     </div>
   </div>
+</section>
 
-  <section class="team-section" id="team">
-    <div class="inner">
-      <p class="section-label">The Team</p>
-      <h2 class="section-title">Who's<br/><em>Behind This</em></h2>
-      <div class="rule"></div>
-      <div class="team-intro">
-        <p>A music industry veteran, a trading card obsessive, and a festival expert — built specifically to make this work at live events. We've been on the ground at CRSSD. We know how festival logistics work.</p>
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">The Solution</span>
+      <h2 class="section-title">Official cards. Built around your lineup.</h2>
+    </div>
+    <div class="feature-grid feature-grid--4">
+      <div class="feature-card"><p class="feature-num">01</p><h4>Official Artist Licensing</h4><p>Every card is fully licensed. We handle all artist approvals and rights clearance — you never deal with a permissions issue.</p></div>
+      <div class="feature-card"><p class="feature-num">02</p><h4>On-Premise Exclusivity</h4><p>Your festival is the only place to get these cards. That exclusivity creates urgency, collector demand, and genuine buzz.</p></div>
+      <div class="feature-card"><p class="feature-num">03</p><h4>Sponsor Integration</h4><p>Cards are a ready-made sponsor vehicle. A brand can co-sign the drop, sponsor the booth, or be printed on the back of every card.</p></div>
+      <div class="feature-card"><p class="feature-num">04</p><h4>Pack-In / Pack-Out</h4><p>We handle production, booth setup, and staffing. No merch team required on your end. We show up and run it.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">What You Get</span>
+      <h2 class="section-title">Three ways to partner.</h2>
+    </div>
+    <div class="tier-grid">
+      <div class="tier-card">
+        <span class="tier-tag">Lineup Drop</span>
+        <h3>Official Lineup Card Set</h3>
+        <ul class="tier-list">
+          <li>Licensed cards for your headliners and key acts</li>
+          <li>Sold exclusively on-premise at your event</li>
+          <li>Artist-approved photography and copy</li>
+          <li>Single card or collector pack format</li>
+        </ul>
       </div>
-      <div class="team-grid">
-        <div class="team-member">
-          <h3>Kevin Charles Macaraeg</h3>
-          <p class="role">Co-Founder · Creative Director · Festival Photographer</p>
-          <p>Former Snapchat Inc. and Sony Music / The Orchard. Festival and tour photographer. MTV contest-winning designer. 10 years in the music industry.</p>
-        </div>
-        <div class="team-member">
-          <h3>Brendon Jasso</h3>
-          <p class="role">Co-Founder &amp; Director of Operations</p>
-          <p>Operations lead with experience in executive leadership and partnerships across B2C and B2B. Managed + facilitated $16M in revenue over 7 years.</p>
-        </div>
-        <div class="team-member">
-          <h3>Liv Johnson</h3>
-          <p class="role">Festival Advisor</p>
-          <p>Lifetime experience producing festivals. Head boss of Almost Nakey. Runs two annual events: San Diego Santa Con &amp; Freedom Fest.</p>
-        </div>
+      <div class="tier-card tier-card--featured">
+        <span class="tier-badge">Most Popular</span>
+        <span class="tier-tag tier-tag--red">Festival Activation</span>
+        <h3>Branded Booth Activation</h3>
+        <ul class="tier-list">
+          <li>Full booth setup and staffing by Headliner Cards</li>
+          <li>Sponsor co-branding on all materials</li>
+          <li>Live card distribution and collector experience</li>
+          <li>Pack-in / pack-out — zero festival staff needed</li>
+        </ul>
+      </div>
+      <div class="tier-card">
+        <span class="tier-tag">Multi-Year</span>
+        <h3>Annual Festival Partnership</h3>
+        <ul class="tier-list">
+          <li>Multi-year deal with rolling card drops</li>
+          <li>Priority access to Headliner's sponsor network</li>
+          <li>Year-over-year collector continuity</li>
+          <li>Exclusive category — no competitor access</li>
+        </ul>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="form-section" id="apply">
-    <p class="section-label">Festival Partnerships</p>
-    <h2 class="section-title">Get a Proposal</h2>
-    <div class="rule"></div>
-    <p class="form-sub">Tell us about your event. We'll come back with a card drop concept built around your lineup.</p>
-    <form class="contact-form" id="festivalForm">
-      <div class="form-row">
-        <div class="form-group">
-          <label>Festival Name *</label>
-          <input type="text" name="festival_name" required placeholder="e.g. CRSSD Festival" />
-        </div>
-        <div class="form-group">
-          <label>Festival Location *</label>
-          <input type="text" name="location" required placeholder="City, State" />
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Contact Name *</label>
-          <input type="text" name="contact_name" required placeholder="Your name" />
-        </div>
-        <div class="form-group">
-          <label>Email *</label>
-          <input type="email" name="email" required placeholder="your@email.com" />
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Phone</label>
-          <input type="tel" name="phone" placeholder="(555) 000-0000" />
-        </div>
-        <div class="form-group">
-          <label>Expected Attendance</label>
-          <select name="attendance">
-            <option value="" disabled selected>Select a range</option>
-            <option>Under 5,000</option>
-            <option>5,000 – 15,000</option>
-            <option>15,000 – 50,000</option>
-            <option>50,000 – 100,000</option>
-            <option>100,000+</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Upcoming Event Date</label>
-          <input type="text" name="event_date" placeholder="e.g. June 2026" />
-        </div>
-        <div class="form-group">
-          <label>Partnership Interest</label>
-          <select name="interest">
-            <option value="" disabled selected>Select an option</option>
-            <option>Official Lineup Card Drop</option>
-            <option>Branded Booth Activation</option>
-            <option>Annual Festival Partnership</option>
-            <option>All of the above — let's talk</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Tell Us About Your Festival</label>
-        <textarea name="message" placeholder="Genre focus, your current merch setup, any existing sponsor relationships we should know about..."></textarea>
-      </div>
-      <button type="submit" class="form-submit">Send Proposal Request →</button>
-      <p class="form-fine">Questions? <a href="mailto:trade@headlinercards.com">trade@headlinercards.com</a></p>
-      <div class="success-msg" id="successMsg">Request received — we'll be in touch within 48 hours.</div>
-    </form>
-  </section>
+<section class="section section--dark" id="case-study">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Case Study</span>
+      <h2 class="section-title">Sierra Nevada × CRSSD.</h2>
+      <p class="section-sub">We activated with Sierra Nevada Brewing Company at CRSSD Festival — a fully branded on-premise trading card drop that drew lines, earned press, and gave attendees something to take home.</p>
+    </div>
+    <div class="gallery-masonry">
+      <img src="images/02-hideaway-signage-palms.jpg" alt="The Hideaway signage" />
+      <img src="images/14-activation-wide-bubbles-crowd.jpg" alt="Activation crowd" />
+      <img src="images/06-fan-celebrating-rainbow-fan.jpg" alt="Fan celebrating" />
+      <img src="images/33-couple-cards-case-hideaway.jpg" alt="Couple with cards case" />
+      <img src="images/27-full-team-hideaway-group.jpg" alt="Full team group" />
+      <img src="images/04-activation-table-crowd-daylight.jpg" alt="Activation table daylight" />
+      <img src="images/17-hideaway-setup-wide-banner.jpg" alt="Hideaway setup" />
+      <img src="images/15-winner-celebration-crowd-cheer.jpg" alt="Winner celebration" />
+      <img src="images/11-collect-the-culture-cards-detail.jpg" alt="Cards detail" />
+      <img src="images/22-group-pose-hideaway.jpg" alt="Group pose" />
+      <img src="images/05-festival-crowd-hazy-ipa-booth.jpg" alt="IPA booth" />
+      <img src="images/01-team-portrait-hideaway-entrance.jpg" alt="Team portrait" />
+      <img src="images/03-fan-collector-card-pose.jpg" alt="Fan collector pose" />
+      <img src="images/13-couple-card-reveal-bubbles.jpg" alt="Card reveal bubbles" />
+      <img src="images/25-trio-cheers-hideaway-moment.jpg" alt="Trio cheers" />
+      <img src="images/28-trio-cards-case-hideaway.jpg" alt="Trio with cases" />
+      <img src="images/29-pair-cards-case-golden-hour.jpg" alt="Cases golden hour" />
+      <img src="images/31-trio-cards-case-reaching.jpg" alt="Trio reaching" />
+      <img src="images/09-sierra-nevada-can-koozie-cards.jpg" alt="Sierra Nevada koozie + cards" />
+      <img src="images/18-pair-portrait-hideaway-sign.jpg" alt="Pair portrait" />
+      <img src="images/24-group-pose-psychedelic.jpg" alt="Group psychedelic" />
+      <img src="images/26-trio-laughing-hideaway-sign.jpg" alt="Trio laughing" />
+      <img src="images/20-crew-fans-hideaway-entrance.jpg" alt="Crew fans" />
+      <img src="images/30-pair-cards-case-sunset.jpg" alt="Pair sunset" />
+    </div>
+  </div>
+</section>
 
-  <footer>
-    <div class="footer-top">
-      <div class="footer-logo"><img src="images/logo.png" alt="Headliner Cards" /></div>
-      <div class="footer-col">
-        <h4>For Festivals</h4>
-        <a href="#about">The Opportunity</a>
-        <a href="#what-you-get">What You Get</a>
-        <a href="#case-study">Case Study</a>
-        <a href="#process">Process</a>
-        <a href="#apply">Get a Proposal</a>
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">The Process</span>
+      <h2 class="section-title">From lineup confirmation to cards on the ground.</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card"><p class="step-num">01 · Lineup Review</p><h4>Identify the artists</h4><p>Share your confirmed lineup. We identify the right artists for the first drop and build a card set concept.</p></div>
+      <div class="step-card"><p class="step-num">02 · Approvals</p><h4>Rights &amp; sign-offs</h4><p>We secure all photography rights and artist sign-offs. You stay out of the weeds — we handle licensing.</p></div>
+      <div class="step-card"><p class="step-num">03 · Print</p><h4>Design &amp; production</h4><p>Cards designed, approved, and printed. Premium soft-touch laminated. Ready 2 weeks before your event.</p></div>
+      <div class="step-card"><p class="step-num">04 · Activate</p><h4>On-site &amp; pack-out</h4><p>We arrive with the booth, staff the activation, and integrate with your sponsor footprint.</p></div>
+    </div>
+    <p class="process-note">Target: <strong>6–8 weeks from confirmed lineup to cards in attendees' hands.</strong></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">The Team</span>
+      <h2 class="section-title">Who's behind this.</h2>
+      <p class="section-sub">A music industry veteran, a trading card obsessive, and a festival expert — built specifically to make this work at live events. We've been on the ground at CRSSD. We know how festival logistics work.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-member"><h4>Kevin Charles Macaraeg</h4><p class="role">Co-Founder · Creative Director · Festival Photographer</p><p>Former Snapchat Inc. and Sony Music / The Orchard. Festival and tour photographer. MTV contest-winning designer. 10 years in music.</p></div>
+      <div class="team-member"><h4>Brendon Jasso</h4><p class="role">Co-Founder &amp; Director of Operations</p><p>Operations lead with experience in executive leadership and partnerships. Managed + facilitated $16M in revenue over 7 years.</p></div>
+      <div class="team-member"><h4>Liv Johnson</h4><p class="role">Festival Advisor</p><p>Lifetime experience producing festivals. Head boss of Almost Nakey. Runs two annual events: San Diego Santa Con &amp; Freedom Fest.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" id="apply">
+  <div class="container">
+    <div class="section-head section-head--center">
+      <span class="eyebrow">Festival Partnerships</span>
+      <h2 class="section-title">Get a proposal.</h2>
+      <p class="section-sub" style="margin-left:auto;margin-right:auto;">Tell us about your event. We'll come back with a card drop concept built around your lineup.</p>
+    </div>
+    <div class="form-wrap">
+      <form id="festivalForm">
+        <div class="form-row">
+          <div class="form-group"><label>Festival Name *</label><input type="text" required placeholder="e.g. CRSSD Festival" /></div>
+          <div class="form-group"><label>Festival Location *</label><input type="text" required placeholder="City, State" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Contact Name *</label><input type="text" required placeholder="Your name" /></div>
+          <div class="form-group"><label>Email *</label><input type="email" required placeholder="your@email.com" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Expected Attendance</label><select><option value="" disabled selected>Select a range</option><option>Under 5,000</option><option>5,000 – 15,000</option><option>15,000 – 50,000</option><option>50,000+</option></select></div>
+          <div class="form-group"><label>Upcoming Event Date</label><input type="text" placeholder="e.g. June 2026" /></div>
+        </div>
+        <div class="form-group"><label>Partnership Interest</label><select><option value="" disabled selected>Select an option</option><option>Official Lineup Card Drop</option><option>Branded Booth Activation</option><option>Annual Festival Partnership</option><option>All of the above — let's talk</option></select></div>
+        <div class="form-group"><label>Tell Us About Your Festival</label><textarea placeholder="Genre focus, current merch setup, existing sponsor relationships..."></textarea></div>
+        <button type="submit" class="form-submit">Send Proposal Request →</button>
+        <p class="form-fine">Questions? <a href="mailto:trade@headlinercards.com">trade@headlinercards.com</a></p>
+        <div class="success-msg">Request received — we'll be in touch within 48 hours.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-row">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="Headliner Cards" />
+        <p>Officially licensed trading cards for the music industry. Artist-approved. Sponsor-ready. Built for live events.</p>
       </div>
       <div class="footer-col">
-        <h4>Other Audiences</h4>
+        <h5>Other Audiences</h5>
         <a href="artist.html">Artists &amp; Managers</a>
-        <a href="sponsor.html">Brands &amp; Sponsors</a>
         <a href="label.html">Record Labels</a>
+        <a href="sponsor.html">Brands &amp; Sponsors</a>
       </div>
       <div class="footer-col">
-        <h4>Contact</h4>
+        <h5>Company</h5>
+        <a href="index.html#about">About</a>
+        <a href="#case-study">Case Studies</a>
+        <a href="mailto:trade@headlinercards.com">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>Get in Touch</h5>
         <a href="mailto:trade@headlinercards.com">trade@headlinercards.com</a>
       </div>
     </div>
     <div class="footer-bottom">
       <p>&copy; 2026 Headliner Cards. All rights reserved.</p>
-      <p class="footer-tagline">Music. Cards. Legacy.</p>
+      <p class="footer-tagline">Music. Cards. <span>Legacy.</span></p>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <script>
-    const slides = ['images/14-activation-wide-bubbles-crowd.jpg','images/04-activation-table-crowd-daylight.jpg','images/05-festival-crowd-hazy-ipa-booth.jpg','images/17-hideaway-setup-wide-banner.jpg','images/10-hideaway-sign-smoke-palms.jpg','images/02-hideaway-signage-palms.jpg'];
-    const ss = document.getElementById('slideshow');
-    slides.forEach((src, i) => {
-      const d = document.createElement('div');
-      d.className = 'hero-slide' + (i === 0 ? ' active' : '');
-      d.style.backgroundImage = `url('${src}')`;
-      ss.appendChild(d);
-    });
-    let cur = 0;
-    setInterval(() => {
-      const all = ss.querySelectorAll('.hero-slide');
-      all[cur].classList.remove('active');
-      cur = (cur + 1) % slides.length;
-      all[cur].classList.add('active');
-    }, 4500);
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle?.addEventListener('click', () => { navToggle.classList.toggle('open'); navLinks.classList.toggle('open'); });
+  document.getElementById('festivalForm')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('.form-submit');
+    btn.textContent = 'Sending…'; btn.disabled = true;
+    setTimeout(() => { this.querySelector('.success-msg').style.display = 'block'; btn.textContent = 'Request Sent ✓'; btn.style.background = '#2D9249'; btn.style.borderColor = '#2D9249'; }, 900);
+  });
+</script>
 
-    document.getElementById('festivalForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const btn = this.querySelector('.form-submit');
-      btn.textContent = 'Sending...'; btn.disabled = true;
-      setTimeout(() => {
-        document.getElementById('successMsg').style.display = 'block';
-        btn.textContent = 'Request Sent ✓'; btn.style.background = '#2D9249'; btn.style.borderColor = '#2D9249';
-      }, 900);
-    });
-  </script>
 </body>
 </html>

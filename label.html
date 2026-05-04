@@ -4,515 +4,265 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Headliner Cards — For Record Labels</title>
+  <meta name="description" content="Trading cards as the new limited-edition merch. Officially licensed catalog and legacy drops collectors hunt for. Pilot model — start small, prove it, scale." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,700;0,900;1,700;1,900&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --yellow: #FFE500; --red: #E8000D; --black: #0A0A0A;
-      --white: #FFFFFF; --off: #F5F5F3; --light: #EBEBEA;
-      --muted: #777777; --border: #E0E0DE;
-    }
-    html { scroll-behavior: smooth; }
-    body { background: var(--white); color: var(--black); font-family: 'Chivo', sans-serif; font-size: 16px; line-height: 1.6; overflow-x: hidden; }
-
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 68px; background: var(--white); border-bottom: 1px solid var(--border); box-shadow: 0 1px 12px rgba(0,0,0,0.06); }
-    .nav-back { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; white-space: nowrap; }
-    .nav-back:hover { color: var(--red); }
-    .nav-logo img { height: 36px; width: auto; display: block; }
-    .nav-links { display: flex; gap: 32px; list-style: none; }
-    .nav-links a { color: var(--black); text-decoration: none; font-weight: 700; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
-    .nav-links a:hover { color: var(--red); }
-    .nav-cta { background: var(--red); color: var(--white); font-weight: 900; font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; padding: 11px 26px; text-decoration: none; transition: opacity 0.2s; }
-    .nav-cta:hover { opacity: 0.85; }
-
-    .hero { position: relative; height: 92vh; min-height: 620px; margin-top: 68px; display: flex; align-items: flex-end; overflow: hidden; }
-    .hero-slideshow { position: absolute; inset: 0; }
-    .hero-slide { position: absolute; inset: 0; background-size: cover; background-position: center 20%; opacity: 0; transition: opacity 1.4s ease-in-out; }
-    .hero-slide.active { opacity: 1; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 55%, rgba(0,0,0,0.1) 100%); z-index: 1; }
-    .hero-content { position: relative; z-index: 2; padding: 0 56px 72px; max-width: 900px; }
-    .hero-eyebrow { display: inline-block; background: var(--yellow); color: var(--black); font-size: 11px; font-weight: 900; letter-spacing: 0.22em; text-transform: uppercase; padding: 6px 14px; margin-bottom: 24px; }
-    .hero h1 { font-weight: 900; font-size: clamp(48px, 8vw, 100px); line-height: 0.93; text-transform: uppercase; color: var(--white); margin-bottom: 28px; }
-    .hero h1 em { font-style: italic; color: var(--yellow); }
-    .hero-sub { font-size: 18px; color: rgba(255,255,255,0.75); max-width: 560px; margin-bottom: 40px; font-weight: 300; line-height: 1.75; }
-    .btn-yellow { display: inline-block; background: var(--yellow); color: var(--black); font-weight: 900; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; padding: 16px 36px; text-decoration: none; margin-right: 12px; transition: opacity 0.2s; }
-    .btn-yellow:hover { opacity: 0.88; }
-    .btn-outline-white { display: inline-block; border: 2px solid rgba(255,255,255,0.4); color: var(--white); font-weight: 700; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; padding: 14px 36px; text-decoration: none; transition: border-color 0.2s, color 0.2s; }
-    .btn-outline-white:hover { border-color: var(--yellow); color: var(--yellow); }
-
-    .ticker-wrap { overflow: hidden; background: var(--black); padding: 13px 0; }
-    .ticker { display: flex; animation: ticker 36s linear infinite; width: max-content; }
-    .ticker-item { font-weight: 700; font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--white); padding: 0 28px; white-space: nowrap; }
-    .ticker-sep { color: var(--yellow); }
-    @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-    section { padding: 96px 56px; }
-    .section-label { font-size: 11px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--red); margin-bottom: 14px; }
-    .section-title { font-weight: 900; font-size: clamp(36px, 5vw, 68px); line-height: 0.95; text-transform: uppercase; color: var(--black); margin-bottom: 20px; }
-    .section-title em { font-style: italic; color: var(--red); }
-    .rule { width: 40px; height: 4px; background: var(--yellow); margin-bottom: 44px; }
-    .inner { max-width: 1200px; margin: 0 auto; }
-
-    .welcome-section { background: var(--off); border-bottom: 1px solid var(--border); }
-    .welcome-inner { max-width: 760px; margin: 0 auto; text-align: center; }
-    .welcome-inner h2 { font-weight: 900; font-size: clamp(28px, 4vw, 48px); margin-bottom: 24px; line-height: 1.1; }
-    .welcome-inner p { font-size: 19px; color: #555; line-height: 1.8; font-weight: 300; }
-    .welcome-inner p strong { color: var(--black); font-weight: 700; }
-
-    .problem-section { background: var(--white); }
-    .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
-    .problem-list { list-style: none; margin-top: 8px; }
-    .problem-list li { padding: 20px 0; border-bottom: 1px solid var(--border); }
-    .problem-list li:last-child { border-bottom: none; }
-    .prob-title { font-weight: 900; font-size: 18px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 6px; }
-    .prob-title span { display: inline-block; background: var(--red); color: var(--white); font-size: 10px; font-weight: 900; letter-spacing: 0.1em; padding: 2px 8px; margin-right: 10px; vertical-align: middle; }
-    .prob-desc { font-size: 15px; color: var(--muted); line-height: 1.65; font-weight: 300; }
-
-    .solution-section { background: var(--black); }
-    .solution-section .section-label { color: var(--yellow); }
-    .solution-section .section-title { color: var(--white); }
-    .solution-section .section-title em { color: var(--yellow); font-style: normal; }
-    .solution-section .rule { background: var(--red); }
-    .solution-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; background: #1a1a1a; border: 1px solid #1a1a1a; }
-    .solution-item { background: #111; padding: 36px 32px; border-top: 3px solid transparent; transition: border-color 0.2s; }
-    .solution-item:hover { border-color: var(--yellow); }
-    .sol-num { font-weight: 900; font-size: 11px; letter-spacing: 0.2em; color: var(--red); margin-bottom: 10px; }
-    .sol-title { font-weight: 900; font-size: 19px; text-transform: uppercase; color: var(--white); margin-bottom: 10px; }
-    .sol-desc { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.7; font-weight: 300; }
-
-    .pilot-section { background: var(--off); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .pilot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--border); border: 1px solid var(--border); margin-top: 56px; }
-    .pilot-card { background: var(--white); padding: 52px 44px; }
-    .pilot-card.highlight { background: var(--black); }
-    .pilot-tag { display: inline-block; background: var(--yellow); color: var(--black); font-weight: 900; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 14px; margin-bottom: 28px; }
-    .pilot-card h3 { font-weight: 900; font-size: clamp(22px, 2.5vw, 32px); text-transform: uppercase; margin-bottom: 20px; line-height: 1; }
-    .pilot-card.highlight h3 { color: var(--white); }
-    .pilot-card p { font-size: 16px; color: #555; line-height: 1.8; font-weight: 300; margin-bottom: 16px; }
-    .pilot-card p:last-of-type { margin-bottom: 0; }
-    .pilot-card.highlight p { color: rgba(255,255,255,0.55); }
-    .pilot-list { list-style: none; margin-top: 24px; }
-    .pilot-list li { font-size: 14px; color: rgba(255,255,255,0.6); padding: 10px 0; border-bottom: 1px solid #222; display: flex; gap: 12px; align-items: baseline; font-weight: 300; line-height: 1.5; }
-    .pilot-list li:last-child { border-bottom: none; }
-    .pilot-list li::before { content: '→'; color: var(--yellow); font-weight: 700; flex-shrink: 0; }
-
-    .formats-section { background: var(--white); border-top: 1px solid var(--border); }
-    .formats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); margin-top: 56px; }
-    .format-card { background: var(--off); padding: 44px 36px; }
-    .format-tag { display: inline-block; background: var(--yellow); color: var(--black); font-weight: 900; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; padding: 6px 14px; margin-bottom: 24px; }
-    .format-tag.red { background: var(--red); color: var(--white); }
-    .format-card h3 { font-weight: 900; font-size: 20px; text-transform: uppercase; margin-bottom: 16px; }
-    .format-card p { font-size: 14px; color: var(--muted); line-height: 1.75; font-weight: 300; }
-
-    .process-section { background: var(--off); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .steps { display:grid; grid-template-columns: repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); margin-top:56px; }
-    .step { background: var(--white); padding: 44px 32px; text-align: center; }
-    .step-num { font-weight:900; font-size:56px; color:rgba(232,0,13,0.1); line-height:1; margin-bottom:12px; }
-    .step-title { font-weight:900; font-size:18px; text-transform:uppercase; color:var(--black); margin-bottom:10px; }
-    .step-desc { font-size:14px; color:var(--muted); line-height:1.7; font-weight:300; }
-    .process-cta { text-align:center; margin-top:40px; font-weight:700; font-size:16px; color:var(--black); }
-    .process-cta strong { color: var(--red); }
-
-    .team-section { background: var(--white); }
-    .team-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:48px; }
-    .team-member h3 { font-weight:900; font-size:22px; margin-bottom:4px; }
-    .team-member .role { font-size:13px; color:var(--muted); font-weight:400; margin-bottom:14px; }
-    .team-member p { font-size:14px; color:#666; line-height:1.75; font-weight:300; }
-    .team-intro { max-width:640px; margin-bottom:56px; }
-    .team-intro p { font-size:17px; color:#555; line-height:1.8; font-weight:300; }
-
-    .logo-break { background: var(--yellow); border-top: 3px solid var(--red); border-bottom: 3px solid var(--red); padding: 52px 56px; display: flex; align-items:center; justify-content:center; gap:56px; flex-wrap:wrap; }
-    .logo-break img { width: min(300px, 45vw); }
-    .logo-break-text p { font-weight:900; font-size:clamp(18px,2.6vw,26px); text-transform:uppercase; letter-spacing:0.04em; color:var(--black); line-height:1.25; }
-    .logo-break-text p span { color:var(--red); }
-
-    .form-section { background: var(--off); border-top: 1px solid var(--border); text-align:center; }
-    .form-section .rule { margin:0 auto 44px; background:var(--red); }
-    .form-sub { color:var(--muted); font-size:16px; max-width:480px; margin:0 auto 56px; font-weight:300; }
-    .contact-form { max-width:660px; margin:0 auto; text-align:left; }
-    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-    .form-group { margin-bottom:14px; }
-    .form-group label { display:block; font-size:11px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-bottom:7px; }
-    .form-group input, .form-group select, .form-group textarea { width:100%; background:var(--white); border:1px solid var(--border); color:var(--black); font-family:'Chivo',sans-serif; font-size:15px; padding:13px 16px; outline:none; appearance:none; -webkit-appearance:none; transition:border-color 0.2s, box-shadow 0.2s; }
-    .form-group select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23aaa' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; padding-right:36px; }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color:var(--black); box-shadow:0 0 0 2px rgba(10,10,10,0.08); }
-    .form-group textarea { resize:vertical; min-height:110px; }
-    .form-submit { width:100%; background:var(--black); color:var(--white); border:2px solid var(--black); font-family:'Chivo',sans-serif; font-weight:900; font-size:16px; letter-spacing:0.14em; text-transform:uppercase; padding:18px; cursor:pointer; margin-top:6px; transition:background 0.2s, border-color 0.2s; }
-    .form-submit:hover { background:var(--red); border-color:var(--red); }
-    .form-fine { text-align:center; font-size:12px; color:#aaa; margin-top:14px; }
-    .form-fine a { color:var(--black); text-decoration:underline; }
-    .success-msg { display:none; background:#F0FFF4; border:1px solid #2D9249; color:#1A6B33; font-weight:700; font-size:14px; letter-spacing:0.06em; text-transform:uppercase; padding:20px; text-align:center; margin-top:14px; }
-
-    footer { background:var(--black); padding:56px 56px 36px; }
-    .footer-top { display:flex; align-items:flex-start; justify-content:space-between; gap:40px; flex-wrap:wrap; padding-bottom:48px; border-bottom:1px solid #222; margin-bottom:32px; }
-    .footer-logo img { height:48px; width:auto; display:block; }
-    .footer-col h4 { font-size:11px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); margin-bottom:16px; }
-    .footer-col a { display:block; font-size:14px; color:rgba(255,255,255,0.5); text-decoration:none; margin-bottom:10px; transition:color 0.2s; }
-    .footer-col a:hover { color:var(--yellow); }
-    .footer-bottom { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; }
-    .footer-bottom p { font-size:12px; color:#444; }
-    .footer-tagline { font-size:11px; font-weight:900; letter-spacing:0.22em; text-transform:uppercase; color:var(--yellow); }
-
-    @media (max-width: 960px) {
-      nav { padding: 0 20px; }
-      .nav-links { display: none; }
-      section { padding: 72px 24px; }
-      .hero-content { padding: 0 24px 56px; }
-      .problem-grid, .pilot-grid { grid-template-columns:1fr; gap:40px; }
-      .solution-grid, .formats-grid { grid-template-columns:1fr; }
-      .team-grid { grid-template-columns:1fr 1fr; }
-      .steps { grid-template-columns:1fr 1fr; }
-      .logo-break { flex-direction:column; text-align:center; }
-      .footer-top { flex-direction:column; }
-      .footer-bottom { flex-direction:column; text-align:center; }
-    }
-    @media (max-width: 580px) {
-      .team-grid { grid-template-columns:1fr; }
-      .steps { grid-template-columns:1fr; }
-      .form-row { grid-template-columns:1fr; }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <nav>
-    <a class="nav-back" href="index.html">← All Audiences</a>
-    <a class="nav-logo" href="label.html"><img src="images/logo.png" alt="Headliner Cards" /></a>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#pilot">Pilot Program</a></li>
-      <li><a href="#formats">Drop Formats</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#team">Team</a></li>
-    </ul>
-    <a class="nav-cta" href="#apply">Start a Pilot</a>
-  </nav>
+<div class="utility-bar">
+  <div class="container">
+    <p class="utility-tagline">The first trading card company built for <span>music</span></p>
+    <a href="mailto:trade@headlinercards.com">trade@headlinercards.com</a>
+  </div>
+</div>
 
-  <div class="hero">
-    <div class="hero-slideshow" id="slideshow"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <span class="hero-eyebrow">For Record Labels</span>
-      <h1>Your Catalog.<br/><em>Collectible.</em></h1>
-      <p class="hero-sub">Trading cards are the new limited-edition merch. Turn your artists' legacy into officially licensed drops that live in collectors' hands — forever.</p>
-      <a class="btn-yellow" href="#apply">Start a Pilot Drop</a>
-      <a class="btn-outline-white" href="#pilot">See the Pilot Model</a>
+<header class="nav">
+  <div class="container nav-row">
+    <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Headliner Cards" /></a>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="artist.html">Artists</a></li>
+        <li><a href="festival.html">Festivals</a></li>
+        <li><a href="label.html" style="color:var(--red);border-bottom-color:var(--red);">Labels</a></li>
+        <li><a href="sponsor.html">Sponsors</a></li>
+        <li><a href="index.html#about">About</a></li>
+      </ul>
+    </nav>
+    <div class="nav-actions">
+      <a href="#apply" class="btn btn-red nav-cta-mobile-hidden">Start a Pilot</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
   </div>
+</header>
 
-  <div class="ticker-wrap">
-    <div class="ticker">
-      <span class="ticker-item">Catalog Drops</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">Limited Edition</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">Official Licensing</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">Drop Culture</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">Artist Legacy Cards</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">New Revenue Channel</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">Pilot Program Available</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">trade@headlinercards.com</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">Catalog Drops</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">Limited Edition</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">Official Licensing</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">Drop Culture</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">Artist Legacy Cards</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">New Revenue Channel</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">Pilot Program Available</span><span class="ticker-item ticker-sep">✦</span>
-      <span class="ticker-item">trade@headlinercards.com</span><span class="ticker-item ticker-sep">✦</span>
+<section class="hero">
+  <div class="hero-media" style="background-image: url('images/33-couple-cards-case-hideaway.jpg');"></div>
+  <div class="hero-inner">
+    <span class="hero-eyebrow">Step 03 · Record Label</span>
+    <h1>The new limited-edition merch. Officially licensed.</h1>
+    <p class="hero-sub">Trading cards are the format sports collectibles took for granted — finally rebuilt for music. Turn your roster's catalog and legacy artists into officially licensed drops collectors hunt for.</p>
+    <div class="hero-actions">
+      <a href="#apply" class="btn btn-red">Start a Pilot</a>
+      <a href="#pilot" class="btn btn-outline-light">See the Pilot Model</a>
     </div>
   </div>
+</section>
 
-  <section class="welcome-section" id="about">
-    <div class="welcome-inner">
-      <p class="section-label" style="text-align:center;">The White Space</p>
-      <h2>Sports Has Had This<br/>for Decades. Music Hasn't.</h2>
-      <div class="rule" style="margin:0 auto 32px;"></div>
-      <p>Baseball cards. Basketball cards. Football cards. Every major sport has an officially licensed collectible product built around its athletes. <strong>Music has never had a version of this — until now.</strong> Your artists have legacy. Your catalog has value. There's a new format to put both of them in collectors' hands.</p>
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head section-head--center">
+      <span class="eyebrow">The White Space</span>
+      <h2 class="section-title">Sports has had this for decades. Music hasn't.</h2>
+      <p class="section-sub" style="margin-left:auto;margin-right:auto;">Baseball cards. Basketball cards. Football cards. Every major sport has an officially licensed collectible product built around its athletes. <strong>Music has never had a version of this — until now.</strong> Your artists have legacy. Your catalog has value. There's a new format to put both of them in collectors' hands.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="problem-section">
-    <div class="inner problem-grid">
+<section class="section">
+  <div class="container">
+    <div class="split-grid">
       <div>
-        <p class="section-label">The Challenge</p>
-        <h2 class="section-title">Merch Is Saturated.<br/><em>Streaming Pays Pennies.</em></h2>
-        <div class="rule"></div>
-        <p style="color:var(--muted);font-size:16px;font-weight:300;margin-bottom:32px;">The existing options for artist marketing and merch aren't moving the needle. There's a new format sitting right in front of the industry.</p>
+        <span class="eyebrow">The Challenge</span>
+        <h2 class="section-title">Merch is saturated. Streaming pays pennies.</h2>
+        <p class="section-sub" style="margin-bottom:24px;">The existing options for artist marketing and merch aren't moving the needle. There's a new format sitting right in front of the industry.</p>
         <ul class="problem-list">
-          <li>
-            <div class="prob-title"><span>01</span> Merch Is a Commodity</div>
-            <p class="prob-desc">Tees and hoodies are a race to the bottom. Every artist has the same SKUs. The format doesn't create collector demand — it creates inventory risk.</p>
-          </li>
-          <li>
-            <div class="prob-title"><span>02</span> Catalog Activation Is Hard</div>
-            <p class="prob-desc">How do you market a 30-year-old album in 2026? Reissues and curated playlists only go so far. There's no physical artifact that brings legacy artists back into cultural conversation.</p>
-          </li>
-          <li>
-            <div class="prob-title"><span>03</span> Superfans Have No Physical Anchor</div>
-            <p class="prob-desc">Streaming is passive. There's no collectible object tying a superfan's identity to the artists they love most. The sports card industry proved this market exists — at massive scale.</p>
-          </li>
+          <li><span class="problem-num">01</span><h4>Merch Is a Commodity</h4><p>Tees and hoodies are a race to the bottom. Every artist has the same SKUs. The format doesn't create collector demand — it creates inventory risk.</p></li>
+          <li><span class="problem-num">02</span><h4>Catalog Activation Is Hard</h4><p>How do you market a 30-year-old album in 2026? Reissues and curated playlists only go so far. There's no physical artifact bringing legacy artists back into cultural conversation.</p></li>
+          <li><span class="problem-num">03</span><h4>Superfans Have No Physical Anchor</h4><p>Streaming is passive. There's no collectible object tying a superfan's identity to the artists they love most. The sports card industry proved this market exists — at massive scale.</p></li>
         </ul>
       </div>
-      <div>
-        <img src="images/33-couple-cards-case-hideaway.jpg" alt="Artist" style="width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;" />
-      </div>
-    </div>
-  </section>
-
-  <section class="solution-section">
-    <div class="inner">
-      <p class="section-label">The Solution</p>
-      <h2 class="section-title">A New Format.<br/><em>Built for Superfans.</em></h2>
-      <div class="rule"></div>
-      <div class="solution-grid">
-        <div class="solution-item">
-          <div class="sol-num">01</div>
-          <div class="sol-title">Official Licensed Drops</div>
-          <p class="sol-desc">Officially licensed trading cards for your artists. Artist-approved photography, copy, and stats. Every card is legitimate — no knockoffs, no gray market.</p>
-        </div>
-        <div class="solution-item">
-          <div class="sol-num">02</div>
-          <div class="sol-title">Catalog Activation</div>
-          <p class="sol-desc">Perfect for legacy artists, anniversary releases, or tour tie-ins. The card drop IS the marketing moment — press-worthy, social-native, collector-driven.</p>
-        </div>
-        <div class="solution-item">
-          <div class="sol-num">03</div>
-          <div class="sol-title">Drop Culture Format</div>
-          <p class="sol-desc">Limited edition. Numbered runs. Scarcity drives demand. Collectors hunt these the same way they hunt sneakers and Supreme drops — your artists in the same conversation.</p>
-        </div>
-        <div class="solution-item">
-          <div class="sol-num">04</div>
-          <div class="sol-title">Pilot Program</div>
-          <p class="sol-desc">Start with a 3–5 card drop. Low commitment. Proven model. Gauge collector demand before you decide to scale across your roster.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="pilot-section" id="pilot">
-    <div class="inner">
-      <p class="section-label">The Pilot Model</p>
-      <h2 class="section-title">Start Small.<br/><em>Prove It First.</em></h2>
-      <div class="rule"></div>
-      <div class="pilot-grid">
-        <div class="pilot-card">
-          <span class="pilot-tag">How It Works</span>
-          <h3>3–5 Card<br/>First Drop</h3>
-          <p>We've already piloted this model with major catalog partners whose artists span decades and continents. The proof of concept is real — and the demand surprised everyone in the room.</p>
-          <p>A pilot drop is low risk. You pick the artist. We handle rights clearance, design, and a premium limited print run. You take it to market. If it lands, you scale.</p>
-        </div>
-        <div class="pilot-card highlight">
-          <span class="pilot-tag">What You Get</span>
-          <h3>Pilot Drop<br/>Includes</h3>
-          <ul class="pilot-list">
-            <li>3–5 card set, artist-approved</li>
-            <li>Numbered limited print run</li>
-            <li>Premium soft-touch laminated finish</li>
-            <li>Full rights clearance handled by Headliner</li>
-            <li>Digital collector gallery and press assets</li>
-            <li>Flat fee — no revenue split on sales</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="formats-section" id="formats">
-    <div class="inner">
-      <p class="section-label">Drop Formats</p>
-      <h2 class="section-title">Three Ways to<br/><em>Activate</em></h2>
-      <div class="rule"></div>
-      <div class="formats-grid">
-        <div class="format-card">
-          <span class="format-tag">Anniversary Drop</span>
-          <h3>Catalog Anniversary</h3>
-          <p>Tie a card drop to a milestone album anniversary. Creates a cultural moment, press opportunity, and a physical artifact for the superfan community to rally around.</p>
-        </div>
-        <div class="format-card">
-          <span class="format-tag red">Tour Drop</span>
-          <h3>Tour &amp; Festival Tie-In</h3>
-          <p>Release a limited card set alongside a tour or major festival appearance. Sold at shows, online, and through our collector network. Drives pre-show anticipation and on-site sales.</p>
-        </div>
-        <div class="format-card">
-          <span class="format-tag">Roster Series</span>
-          <h3>Multi-Artist<br/>Roster Series</h3>
-          <p>A rolling card series across your full roster — individual artist drops that build into a collector set. Drives cross-discovery and keeps your label top of mind with the collector community.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="process-section" id="process">
-    <div class="inner">
-      <p class="section-label">The Process</p>
-      <h2 class="section-title">From Catalog Meeting<br/><em>to Drop Day</em></h2>
-      <div class="rule"></div>
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-title">Pilot Proposal</div>
-          <p class="step-desc">Tell us your artist and catalog focus. We build a drop concept — card count, format, and creative direction — around their legacy.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-title">Rights Clearance</div>
-          <p class="step-desc">We work with your team to secure photography, stats, and copy approvals. We know how to move through this process quickly.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-title">Design & Print</div>
-          <p class="step-desc">3–5 card first drop, numbered run. Premium soft-touch laminated. Artist signs off before we print a single card.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <div class="step-title">Drop & Distribute</div>
-          <p class="step-desc">We connect you to our collector network, festival partners, and retail channels. The drop is the moment — we make sure it lands.</p>
-        </div>
-      </div>
-      <p class="process-cta">Target: <strong>6–8 weeks from first meeting to drop day.</strong></p>
-    </div>
-  </section>
-
-  <div class="logo-break">
-    <img src="images/logo.png" alt="Headliner Cards" />
-    <div class="logo-break-text">
-      <p>The first trading card<br/>company <span>built for music.</span></p>
+      <div class="split-image" style="background-image: url('images/32-solo-portrait-cards-case.jpg');"></div>
     </div>
   </div>
+</section>
 
-  <section class="team-section" id="team">
-    <div class="inner">
-      <p class="section-label">The Team</p>
-      <h2 class="section-title">Who's<br/><em>Behind This</em></h2>
-      <div class="rule"></div>
-      <div class="team-intro">
-        <p>A music industry veteran, an operations expert, and a seasoned music manager — the exact combination you need to navigate artist rights, licensing, and collector demand simultaneously. We've done the pilot. We know what works.</p>
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">The Solution</span>
+      <h2 class="section-title">A new format. Built for superfans.</h2>
+    </div>
+    <div class="feature-grid feature-grid--4">
+      <div class="feature-card"><p class="feature-num">01</p><h4>Official Licensed Drops</h4><p>Officially licensed trading cards for your artists. Artist-approved photography, copy, and stats. Every card is legitimate — no knockoffs, no gray market.</p></div>
+      <div class="feature-card"><p class="feature-num">02</p><h4>Catalog Activation</h4><p>Perfect for legacy artists, anniversary releases, or tour tie-ins. The card drop IS the marketing moment — press-worthy, social-native, collector-driven.</p></div>
+      <div class="feature-card"><p class="feature-num">03</p><h4>Drop Culture Format</h4><p>Limited edition. Numbered runs. Scarcity drives demand. Collectors hunt these the same way they hunt sneakers and Supreme drops.</p></div>
+      <div class="feature-card"><p class="feature-num">04</p><h4>Pilot Program</h4><p>Start with a 3–5 card drop. Low commitment. Proven model. Gauge collector demand before you decide to scale across your roster.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="pilot">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">The Pilot Model</span>
+      <h2 class="section-title">Start small. Prove it first.</h2>
+    </div>
+    <div class="pilot-grid">
+      <div class="pilot-card">
+        <span class="tier-tag">How It Works</span>
+        <h3>3–5 card first drop</h3>
+        <p>We've already piloted this model with major catalog partners whose artists span decades and continents. The proof of concept is real — and the demand surprised everyone in the room.</p>
+        <p>A pilot drop is low risk. You pick the artist. We handle rights clearance, design, and a premium limited print run. You take it to market. If it lands, you scale.</p>
       </div>
-      <div class="team-grid">
-        <div class="team-member">
-          <h3>Kevin Charles Macaraeg</h3>
-          <p class="role">Co-Founder · Creative Director · Designer</p>
-          <p>Former Snapchat Inc. and Sony Music / The Orchard. MTV contest-winning designer. Past artists include BTS, Oasis, Franc Moody, Jungle, Sammy Virji. 10 years in the music industry.</p>
-        </div>
-        <div class="team-member">
-          <h3>Brendon Jasso</h3>
-          <p class="role">Co-Founder &amp; Director of Operations</p>
-          <p>Operations and partnership lead. Managed + facilitated $16M in revenue over 7 years. Experience across B2C and B2B in highly regulated and licensed environments.</p>
-        </div>
-        <div class="team-member">
-          <h3>Ryan Hambsch</h3>
-          <p class="role">Music Industry Advisor</p>
-          <p>Two decades of music management. Worked alongside Moby, Robyn, The Blessed Madonna, Shouse, and Royksopp. The relationships and industry credibility to open doors at the label level.</p>
-        </div>
+      <div class="pilot-card highlight">
+        <span class="tier-tag tier-tag--red">What You Get</span>
+        <h3>Pilot drop includes</h3>
+        <ul class="pilot-list">
+          <li>3–5 card set, artist-approved</li>
+          <li>Numbered limited print run</li>
+          <li>Premium soft-touch laminated finish</li>
+          <li>Full rights clearance handled by Headliner</li>
+          <li>Digital collector gallery and press assets</li>
+          <li>Flat fee — no revenue split on sales</li>
+        </ul>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="form-section" id="apply">
-    <p class="section-label">Label Partnerships</p>
-    <h2 class="section-title">Start a Pilot</h2>
-    <div class="rule"></div>
-    <p class="form-sub">Tell us about your artist or catalog focus. We'll come back with a pilot drop concept built around their legacy.</p>
-    <form class="contact-form" id="labelForm">
-      <div class="form-row">
-        <div class="form-group">
-          <label>Label / Company Name *</label>
-          <input type="text" name="label_name" required placeholder="e.g. Atlantic Records" />
-        </div>
-        <div class="form-group">
-          <label>Contact Name *</label>
-          <input type="text" name="contact_name" required placeholder="Your name" />
-        </div>
+<section class="section section--alt" id="formats">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Drop Formats</span>
+      <h2 class="section-title">Three ways to activate.</h2>
+    </div>
+    <div class="tier-grid">
+      <div class="tier-card">
+        <span class="tier-tag">Anniversary Drop</span>
+        <h3>Catalog Anniversary</h3>
+        <ul class="tier-list">
+          <li>Tied to a milestone album anniversary</li>
+          <li>Creates a cultural moment + press opportunity</li>
+          <li>Physical artifact for the superfan community</li>
+        </ul>
       </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Email *</label>
-          <input type="email" name="email" required placeholder="your@email.com" />
-        </div>
-        <div class="form-group">
-          <label>Phone</label>
-          <input type="tel" name="phone" placeholder="(555) 000-0000" />
-        </div>
+      <div class="tier-card tier-card--featured">
+        <span class="tier-badge">Most Popular</span>
+        <span class="tier-tag tier-tag--red">Tour Drop</span>
+        <h3>Tour &amp; Festival Tie-In</h3>
+        <ul class="tier-list">
+          <li>Limited card set for tour or festival appearance</li>
+          <li>Sold at shows, online, and via collector network</li>
+          <li>Drives pre-show anticipation and on-site sales</li>
+        </ul>
       </div>
-      <div class="form-group">
-        <label>Artist(s) You're Representing</label>
-        <textarea name="artists" style="min-height:80px;" placeholder="Which artist or artists are you thinking about for the first drop?"></textarea>
+      <div class="tier-card">
+        <span class="tier-tag">Roster Series</span>
+        <h3>Multi-Artist Roster Series</h3>
+        <ul class="tier-list">
+          <li>Rolling card series across your full roster</li>
+          <li>Drives cross-discovery and label visibility</li>
+          <li>Builds a collector set over multiple drops</li>
+        </ul>
       </div>
-      <div class="form-group">
-        <label>Catalog Focus</label>
-        <select name="catalog_focus">
-          <option value="" disabled selected>Select an option</option>
-          <option>New Release Tie-In</option>
-          <option>Anniversary / Legacy Catalog</option>
-          <option>Tour or Festival Tie-In</option>
-          <option>Multi-Artist Roster Series</option>
-          <option>Not sure yet — let's explore</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Tell Us About the Opportunity</label>
-        <textarea name="message" placeholder="Any context on the artist, the timing, or what success looks like for you. The more we know, the better we can tailor the pilot concept."></textarea>
-      </div>
-      <button type="submit" class="form-submit">Send Pilot Request →</button>
-      <p class="form-fine">Questions? <a href="mailto:trade@headlinercards.com">trade@headlinercards.com</a></p>
-      <div class="success-msg" id="successMsg">Request received — we'll be in touch within 48 hours.</div>
-    </form>
-  </section>
+    </div>
+  </div>
+</section>
 
-  <footer>
-    <div class="footer-top">
-      <div class="footer-logo"><img src="images/logo.png" alt="Headliner Cards" /></div>
-      <div class="footer-col">
-        <h4>For Labels</h4>
-        <a href="#about">The White Space</a>
-        <a href="#pilot">Pilot Program</a>
-        <a href="#formats">Drop Formats</a>
-        <a href="#process">Process</a>
-        <a href="#apply">Start a Pilot</a>
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">The Process</span>
+      <h2 class="section-title">From catalog meeting to drop day.</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card"><p class="step-num">01 · Pilot Proposal</p><h4>Build the concept</h4><p>Tell us your artist and catalog focus. We build a drop concept — card count, format, and creative direction — around their legacy.</p></div>
+      <div class="step-card"><p class="step-num">02 · Rights</p><h4>Clearance</h4><p>We work with your team to secure photography, stats, and copy approvals. We know how to move through this process quickly.</p></div>
+      <div class="step-card"><p class="step-num">03 · Print</p><h4>Design &amp; production</h4><p>3–5 card first drop, numbered run. Premium soft-touch laminated. Artist signs off before we print a single card.</p></div>
+      <div class="step-card"><p class="step-num">04 · Drop</p><h4>Distribute</h4><p>We connect you to our collector network, festival partners, and retail channels. The drop is the moment — we make sure it lands.</p></div>
+    </div>
+    <p class="process-note">Target: <strong>6–8 weeks from first meeting to drop day.</strong></p>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">The Team</span>
+      <h2 class="section-title">Who's behind this.</h2>
+      <p class="section-sub">A music industry veteran, an operations expert, and a seasoned music manager — the exact combination you need to navigate artist rights, licensing, and collector demand simultaneously.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-member"><h4>Kevin Charles Macaraeg</h4><p class="role">Co-Founder · Creative Director · Designer</p><p>Former Snapchat Inc. and Sony Music / The Orchard. MTV contest-winning designer. Past artists include BTS, Oasis, Franc Moody, Jungle, Sammy Virji. 10 years in the music industry.</p></div>
+      <div class="team-member"><h4>Brendon Jasso</h4><p class="role">Co-Founder &amp; Director of Operations</p><p>Operations and partnership lead. Managed + facilitated $16M in revenue over 7 years. Experience across B2C and B2B in highly regulated and licensed environments.</p></div>
+      <div class="team-member"><h4>Ryan Hambsch</h4><p class="role">Music Industry Advisor</p><p>Two decades of music management. Worked alongside Moby, Robyn, The Blessed Madonna, Shouse, and Royksopp. The relationships and industry credibility to open doors at the label level.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="apply">
+  <div class="container">
+    <div class="section-head section-head--center">
+      <span class="eyebrow">Label Partnerships</span>
+      <h2 class="section-title">Start a pilot.</h2>
+      <p class="section-sub" style="margin-left:auto;margin-right:auto;">Tell us about your artist or catalog focus. We'll come back with a pilot drop concept built around their legacy.</p>
+    </div>
+    <div class="form-wrap">
+      <form id="labelForm">
+        <div class="form-row">
+          <div class="form-group"><label>Label / Company Name *</label><input type="text" required placeholder="e.g. Atlantic Records" /></div>
+          <div class="form-group"><label>Contact Name *</label><input type="text" required placeholder="Your name" /></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Email *</label><input type="email" required placeholder="your@email.com" /></div>
+          <div class="form-group"><label>Phone</label><input type="tel" placeholder="(555) 000-0000" /></div>
+        </div>
+        <div class="form-group"><label>Artist(s) You're Representing</label><textarea style="min-height:80px;" placeholder="Which artist or artists are you thinking about for the first drop?"></textarea></div>
+        <div class="form-group"><label>Catalog Focus</label><select><option value="" disabled selected>Select an option</option><option>New Release Tie-In</option><option>Anniversary / Legacy Catalog</option><option>Tour or Festival Tie-In</option><option>Multi-Artist Roster Series</option><option>Not sure yet — let's explore</option></select></div>
+        <div class="form-group"><label>Tell Us About the Opportunity</label><textarea placeholder="Any context on the artist, the timing, or what success looks like for you."></textarea></div>
+        <button type="submit" class="form-submit">Send Pilot Request →</button>
+        <p class="form-fine">Questions? <a href="mailto:trade@headlinercards.com">trade@headlinercards.com</a></p>
+        <div class="success-msg">Request received — we'll be in touch within 48 hours.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-row">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="Headliner Cards" />
+        <p>Officially licensed trading cards for the music industry. Artist-approved. Sponsor-ready. Built for live events.</p>
       </div>
       <div class="footer-col">
-        <h4>Other Audiences</h4>
+        <h5>Other Audiences</h5>
         <a href="artist.html">Artists &amp; Managers</a>
         <a href="festival.html">Festivals &amp; Promoters</a>
         <a href="sponsor.html">Brands &amp; Sponsors</a>
       </div>
       <div class="footer-col">
-        <h4>Contact</h4>
+        <h5>Company</h5>
+        <a href="index.html#about">About</a>
+        <a href="festival.html#case-study">Case Studies</a>
+        <a href="mailto:trade@headlinercards.com">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h5>Get in Touch</h5>
         <a href="mailto:trade@headlinercards.com">trade@headlinercards.com</a>
       </div>
     </div>
     <div class="footer-bottom">
       <p>&copy; 2026 Headliner Cards. All rights reserved.</p>
-      <p class="footer-tagline">Music. Cards. Legacy.</p>
+      <p class="footer-tagline">Music. Cards. <span>Legacy.</span></p>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <script>
-    const slides = ['images/27-full-team-hideaway-group.jpg','images/33-couple-cards-case-hideaway.jpg','images/22-group-pose-hideaway.jpg','images/19-group-fan-hideaway.jpg','images/21-group-cheers-hideaway.jpg','images/32-solo-portrait-cards-case.jpg'];
-    const ss = document.getElementById('slideshow');
-    slides.forEach((src, i) => {
-      const d = document.createElement('div');
-      d.className = 'hero-slide' + (i === 0 ? ' active' : '');
-      d.style.backgroundImage = `url('${src}')`;
-      ss.appendChild(d);
-    });
-    let cur = 0;
-    setInterval(() => {
-      const all = ss.querySelectorAll('.hero-slide');
-      all[cur].classList.remove('active');
-      cur = (cur + 1) % slides.length;
-      all[cur].classList.add('active');
-    }, 4500);
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle?.addEventListener('click', () => { navToggle.classList.toggle('open'); navLinks.classList.toggle('open'); });
+  document.getElementById('labelForm')?.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('.form-submit');
+    btn.textContent = 'Sending…'; btn.disabled = true;
+    setTimeout(() => { this.querySelector('.success-msg').style.display = 'block'; btn.textContent = 'Request Sent ✓'; btn.style.background = '#2D9249'; btn.style.borderColor = '#2D9249'; }, 900);
+  });
+</script>
 
-    document.getElementById('labelForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const btn = this.querySelector('.form-submit');
-      btn.textContent = 'Sending...'; btn.disabled = true;
-      setTimeout(() => {
-        document.getElementById('successMsg').style.display = 'block';
-        btn.textContent = 'Request Sent ✓'; btn.style.background = '#2D9249'; btn.style.borderColor = '#2D9249';
-      }, 900);
-    });
-  </script>
 </body>
 </html>
